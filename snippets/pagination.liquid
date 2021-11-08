@@ -1,0 +1,21 @@
+<nav class="pagination d-flex align-items-center justify-content-center">
+  {% unless paginate.previous.is_link %}
+    <a href="#" class="prev disabled">
+      <span class="accessibility">
+        Previous page
+      </span>
+    </a>
+  {% else %}
+    <a href="{{ paginate.previous.url }}" class="prev"></a>
+  {% endunless %}
+  <span class="page">{{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}</span>
+  {% unless paginate.next.is_link %}
+    <a href="#" class="next disabled"></a>
+  {% else %}
+    <a href="{{ paginate.next.url }}" class="next">
+      <span class="accessibility">
+        Next page
+      </span>
+    </a>
+  {% endunless %}
+</nav>

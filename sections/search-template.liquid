@@ -1,0 +1,114 @@
+{% paginate search.results by 24 %}
+  <div class="section page-section">
+    <div class="container">
+      <div class="page-title-block text-center">
+        <h1 class="h3">
+          {% if search.performed %}
+            <span class="accessibility">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
+            {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+          {% else %}
+            {{ 'general.search.title' | t }}
+          {% endif %}
+        </h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 col-md-6 mx-auto">
+          <form action="/search" method="get" role="search" class="page-search-form">
+            <div class="d-flex align-items-center">
+              <input type="search"
+                     name="q"
+                     id="Search"
+                     value="{{ search.terms | escape }}"
+                     placeholder="{{ 'general.search.placeholder' | t }}">
+              {% comment %}theme-check-disable{% endcomment %}
+              {% render 'button',
+                element: 'button',
+                class: 'btn page-search-form__button d-flex align-items-center',
+                text: 'Search on store',
+                snippet: true,
+                icon: 'search',
+                type: 'submit'
+              %}
+              {% comment %}theme-check-enable{% endcomment %}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="section">
+        {% if search.performed %}
+          {% if search.results_count == 0 %}
+            <div class="text-center">
+              <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+            </div>
+          {% else %}
+            {% for item in search.results %}
+              <div class="search-item">
+                <div class="row align-items-center justify-content-center">
+                  <div class="col-3 col-md-2 col-lg-1">
+                    <a href="{{ item.url | within: collection }}">
+                      {% assign featured_image = item.image | default: item.featured_image %}
+                      {% render
+                        'image',
+                        src: featured_image,
+                        d: '81x100',
+                        src_m: featured_image,
+                        m: '71x88',
+                        placeholder: 'img-placeholder.png'
+                      %}
+                    </a>
+                  </div>
+                  <div class="col-9 col-md-8 col-lg-7">
+                    <div class="row justify-content-md-between align-items-md-center">
+                      <div class="col-md-6 mb-3 mb-md-0">
+                        <h2 class="search-item__title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                      </div>
+                      <div class="col-md-6">
+                        {% if item.object_type == 'product' %}
+                          <div class="search-item__price">
+                            {% if item.compare_at_price > item.price %}
+                              {% if item.price_varies %}
+                                {% assign sale_price = item.price | money %}
+                                {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                              {% else %}
+                                {{ 'products.product.on_sale' | t }}
+                                <ins>{{ item.price | money }}</ins>
+                              {% endif %}
+                              <span class="accessibility">{{ 'products.product.regular_price' | t }}</span>
+                              <del>{{ item.compare_at_price | money }}</del>
+                            {% else %}
+                              {% if item.price_varies %}
+                                {% assign price = item.price | money %}
+                                <span>{{ 'products.product.from_text_html' | t: price: price }}</span>
+                              {% else %}
+                                <span>{{ item.price | money }}</span>
+                              {% endif %}
+                            {% endif %}
+                            {% unless item.available %}
+                              {{ 'products.product.sold_out' | t }}
+                            {% endunless %}
+                          </div>
+                        {% else %}
+                          <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            {% comment %}{% if paginate.pages > 1 %}
+              {% render 'pagination' %}
+            {% endif %}{% endcomment %}
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Search"
+}
+{% endschema %}

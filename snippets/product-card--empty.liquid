@@ -1,0 +1,19 @@
+{% unless grid_item_width %}
+{% assign grid_item_width = 'col-sm-6 col-lg-3' %}
+{% endunless %}
+
+<div class="{{ grid_item_width }}">
+	<div class="product-item text-center">
+		<div class="product-item__img">
+			{{ 'product-' | append: index | placeholder_svg_tag: 'placeholder-svg' }}
+		</div>
+		<div class="product-item__box">
+			<h3 class="product-item__title">
+				<div>Your product's name</div>
+			</h3>
+			<div class="product-item__price">
+				{% render "product-price", product: product %}
+			</div>
+		</div>
+	</div>
+</div>

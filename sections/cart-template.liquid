@@ -1,0 +1,104 @@
+<div id="cart" data-note-enable="{{ settings.cart_notes_enable }}">
+  <div class="container">
+    
+    <div data-has-items {% if cart.item_count == 0 %}class="d-none"{% endif %}>
+      <div class="page-title-block text-center">
+        <h1 class="h2">
+          {{ 'cart.general.title' | t }}
+        </h1>
+      </div>
+      
+      <form action="/cart" method="post" class="cart-form" novalidate>
+        <table class="cart-table body-2 mb-4">
+          <thead class="small--hide">
+          <tr>
+            <th>{{ 'cart.label.product' | t }}</th>
+            <th>{{ 'cart.label.price' | t }}</th>
+            <th>{{ 'cart.label.quantity' | t }}</th>
+            <th>{{ 'cart.label.total' | t }}</th>
+          </tr>
+          </thead>
+          <tbody data-cart-items>
+          {% render 'cart-items' %}
+          </tbody>
+        </table>
+        
+        <div class="d-md-flex justify-content-between">
+          {% if settings.cart_notes_enable %}
+            <div class="col-md-5 col-lg-4 px-0 mb-4 mb-md-0">
+              <label for="CartSpecialInstructions" class="d-inline-block mb-2">
+                <strong>
+                  {{ 'cart.general.note' | t }}
+                </strong>
+              </label>
+              <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+            </div>
+          {% endif %}
+          
+          <div class="col-md-5 col-lg-4 px-0 ml-auto">
+            <div class="cart-form__total mb-4">
+              <div class="row">
+                <div class="col-8">
+                  <p>{{ 'cart.general.subtotal' | t }}</p>
+                </div>
+                <div class="col-4">
+                  <p data-cart-total>{{ cart.total_price | money }}</p>
+                </div>
+              </div>
+              <div class="cart-form__total__text-box">
+                {% if cart.total_discounts > 0 %}
+                  <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+                {% endif %}
+                <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
+              </div>
+            </div>
+            <input type="submit" class="mb-3 button" name="checkout" value="{{ 'cart.general.checkout' | t }}">
+          </div>
+        </div>
+      </form>
+    
+    </div>
+    <div class="row{% if cart.item_count != 0 %} d-none{% endif %}" data-no-items>
+      <div class="col-md-8 mx-auto">
+        <div class="text-center">
+          <div class="page-title-block">
+            <h1>{{ 'cart.general.title' | t }}</h1>
+          </div>
+          
+          {% comment %}
+          Cart empty state
+          {% endcomment %}
+          <div class="supports-cookies">
+            <p>
+              {% render
+                'button',
+                element: 'a',
+                href: '#',
+                class: 'button--secondary',
+                text: 'Return to shop'
+              %}
+            </p>
+          </div>
+          
+          {% comment %}
+          Cart no cookies state
+          ---------------------
+          Browser cookies are required to use the cart. If cookies aren't enabled in the
+          browser a message is displayed prompting the user to enable them.
+          {% endcomment %}
+          <div class="supports-no-cookies">
+            <p>{{ 'cart.general.cookies_required' | t }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="preact-cart"></div>
+
+{% schema %}
+{
+  "name": "Cart"
+}
+{% endschema %}

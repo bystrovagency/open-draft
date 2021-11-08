@@ -1,0 +1,66 @@
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+{%- assign t = template | split: '.' | first -%}
+  <nav aria-label="breadcrumbs">
+    <div class="container">
+      <ul class="breadcrumbs">
+        <li>
+          <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        </li>
+        {%- case t -%}
+        {%- when 'page' -%}
+          <li>
+            {{ page.title }}
+          </li>
+        {%- when 'product' -%}
+          {%- if collection.url -%}
+            <li>
+              {{ collection.title | link_to: collection.url }}
+            </li>
+          {%- endif -%}
+          <li>
+            {{ product.title }}
+          </li>
+        {%- when 'collection' and collection.handle -%}
+          {%- if current_tags -%}
+            <li>
+              {{ collection.title | link_to: collection.url }}
+            </li>
+            <li>
+              {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+              {{ current_tags | join: " + " }}
+            </li>
+          {%- else -%}
+            <li>
+              {{ collection.title }}
+            </li>
+          {%- endif -%}
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li>
+              {{ blog.title | link_to: blog.url }}
+            </li>
+            <li>
+              {%- capture tag_url -%}{{ blog.url }}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+              {{ current_tags | join: " + " }}
+            </li>
+          {%- else -%}
+            <li>
+              {{ blog.title }}
+            </li>
+          {%- endif -%}
+        {%- when 'article' -%}
+          <li>
+            {{ blog.title | link_to: blog.url }}
+          </li>
+          <li>
+            {{ article.title }}
+          </li>
+          {%- else -%}
+          <li>
+            {{ page_title }}
+          </li>
+        {%- endcase -%}
+      </ul>
+    </div>
+  </nav>
+{%- endunless -%}

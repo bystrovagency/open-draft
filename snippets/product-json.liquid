@@ -1,0 +1,64 @@
+{
+    "available": {{ product.available | json }},
+    "collections": {{ product.collections | json }},
+    "compare_at_price": {{ product.compare_at_price | json }},
+    "compare_at_price_max": {{ product.compare_at_price_max | json }},
+    "compare_at_price_min": {{ product.compare_at_price_min | json }},
+    "compare_at_price_varies": {{ product.compare_at_price_varies | json }},
+    "description": {{ product.description | json }},
+    "featured_image": {{ product.featured_image | json }},
+    "featured_media": {{ product.featured_media | json }},
+    "first_available_variant": {{ product.first_available_variant | json }},
+    "gift_card": {{ product.gift_card | json }},
+    "handle": {{ product.handle | json }},
+    "has_only_default_variant": {{ product.has_only_default_variant | json }},
+    "id": {{ product.id | json }},
+    "images": {{ product.images | json }},
+    "media": {{ product.media | json }},
+    "options": {{ product.options | json }},
+    "options_by_name": {{ product.options_by_name | json }},
+    "options_with_values": {{ product.options_with_values | json }},
+    "price": {{ product.price | json }},
+    "price_max": {{ product.price_max | json }},
+    "price_min": {{ product.price_min | json }},
+    "price_varies": {{ product.price_varies | json }},
+    "published_at": {{ product.published_at | json }},
+    "requires_selling_plan": {{ product.requires_selling_plan | json }},
+    "selected_variant": {{ product.selected_variant | json }},
+    "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }},
+    "selected_or_first_available_selling_plan_allocation": {{ product.selected_or_first_available_selling_plan_allocation | json }},
+    "selected_selling_plan": {{ product.selected_selling_plan | json }},
+    "selected_selling_plan_allocation": {{ product.selected_selling_plan_allocation | json }},
+    "selling_plan_groups": {{ product.selling_plan_groups | json }},
+    "tags": {{ product.tags | json }},
+    "template_suffix": {{ product.template_suffix | json }},
+    "title": {{ product.title | json }},
+    "type": {{ product.type | json }},
+    "url": {{ product.url | json }},
+    "variants": [
+    {% for variant in product.variants %}
+      {
+        "barcode": {{ variant.barcode | json }},
+        "compare_at_price": {{ variant.compare_at_price | json }},
+        "featured_media": {{ variant.featured_media | json }},
+        "id": {{ variant.id | json }},
+        "product_id": {{ product.id | json }},
+        "inventory_management": {{ variant.inventory_management | json }},
+        "name": {{ variant | json }},
+        "options": [
+          {% for option in variant.options %}
+            {{ option | json }}{%- unless forloop.last -%},{%- endunless -%}
+          {% endfor %}
+        ],
+        "sku": {{ variant.sku | json }},
+        "title": {{ variant.title | json }},
+        "available": {{ variant.available | json }},
+        "price": {{ variant.price | json }},
+        "quantity": {{ variant.inventory_quantity | json }},
+        "image": {{ variant.featured_media | default: product.featured_media | json }}
+      }
+      {%- unless forloop.last -%},{%- endunless -%}
+    {% endfor %}
+    ],
+    "vendor": {{ product.vendor | json }}
+}

@@ -1,0 +1,46 @@
+<div class="section page-section">
+    <div class="container">
+      <div class="page-title-block text-center">
+        <h1 class="h2">{{ blog.title }}</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-lg-9">
+          {% for article in blog.articles %}
+            <article role="article" class="post">
+              <header role="banner" class="post__header">
+                <h2 class="h3 post__title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+                <div class="post__date">
+                  {{ article.published_at | time_tag: format: 'month_day_year' }}
+                </div>
+                {% if blog.comments_enabled? %}
+                  <a href="{{ article.url }}#comments" class="anchor-link">{{ 'blogs.comments.with_count' | t: count: article.comments_count }}</a>
+                {% endif %}
+              </header>
+              {% if article.image %}
+                <a href="{{ article.url }}" class="post__img">
+                  {% render
+                    'image',
+                    src: article.image.src,
+                    d: '857x',
+                    src_m: article.image.src,
+                    m: '375x',
+                  %}
+                </a>
+              {% endif %}
+              <div>
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

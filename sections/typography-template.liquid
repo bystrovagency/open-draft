@@ -1,0 +1,293 @@
+<div class="section">
+    <div class="container">
+      <div class="page-title-block text-center">
+        <h1>{{ page.title }}</h1>
+      </div>
+      <div class="rte">
+        <h1>h1</h1>
+        <h2>H2</h2>
+        <h3>h3</h3>
+        <h4>h4</h4>
+        <h5>h5</h5>
+        <h6>h6</h6>
+        <h2>Title</h2>
+        <h3>subtitle</h3>
+        <p>The ROUND sunglasses are our smallest and lightest design, yet these frames are virtually unbreakable. The open
+          and breezy Base Curve 6 design offers just enough ventilation even on the hottest day.</p>
+        <p><b>The ROUND sunglasses are our smallest and lightest design</b></p>
+        <h2>Title</h2>
+        <div class="text-size-sm">
+          <p>Try on frames at home first. You’ll be charged $30 for each pair and simply use the prepaid return label for
+            100% refund. Press “add try on” to add try on frame to the cart.</p>
+        </div>
+        <p>The ROUND sunglasses are our smallest and lightest design, yet these frames are virtually unbreakable. The open
+          and breezy Base Curve 6 design offers just enough ventilation even on the hottest day.</p>
+        <p>The ROUND sunglasses are our smallest and lightest design, yet these frames are virtually unbreakable. The open
+          and breezy Base Curve 6 design offers just enough ventilation even on the hottest day.</p>
+        <ul>
+          <li>Unbreakable memory-flex polymer construction</li>
+          <li>Lightweight and comfortable, especially under a helmet</li>
+          <li>Satin-touch texture for grip &amp; comfort</li>
+          <li>Front-eject lens-retention groove increases safety</li>
+        </ul>
+        <p>The ROUND sunglasses are our smallest and lightest design, yet these frames are virtually unbreakable. The open
+          and breezy Base Curve 6 design offers just enough ventilation even on the hottest day.</p>
+        <p>The ROUND sunglasses are our smallest and lightest design, yet these frames are virtually unbreakable. The open
+          and breezy Base Curve 6 design offers just enough ventilation even on the hottest day.</p>
+        <blockquote>Stay hungry. Stay foolish.</blockquote>
+        <p>Multi line blockquote with a cite reference:</p>
+        <blockquote>
+          <p>People think focus means saying yes to the thing you've got to focus on. But that's not what it means at all.
+            It means saying no to the hundred other good ideas that there are. You have to pick carefully. I'm actually as
+            proud of the things we haven't done as the things I have done. Innovation is saying no to 1,000 things.</p>
+          <p>
+            <cite>Steve Jobs - Apple Worldwide Developers' Conference, 1997</cite>
+          </p>
+        </blockquote>
+        <strong>Address Tag</strong>
+        <address>
+          <p>1 Infinite Loop Cupertino, CA 95014 United States</p>
+        </address>
+        <strong>Anchor Tag (aka. Link)</strong>
+        <p>This is an example of a <a title="Apple" href="https://apple.com/">link</a>.</p>
+        <strong>Emphasize Tag</strong>
+        <p>The emphasize tag should <i>italicize</i> text.</p>
+        <div class="row p-5">
+          <div class="col-md-6 mb-5">
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                class: 'button--lg' %}
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                icon: 'search',
+                class: 'button--lg btn--with-icon' %}
+
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                type: 'icon',
+                icon: 'search',
+                class: 'button btn button--lg' %}
+
+            </div>
+          </div>
+          <div class="col-md-6 mb-5">
+            <div class="d-md-inline-block mb-2">
+              {% render 'button' %}
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                icon: 'search',
+                class: 'btn--with-icon' %}
+            </div>
+            <div class="d-md-inline-block mb-2">
+              <button class="button" disabled>
+                asd
+              </button>
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                type: 'icon',
+                icon: 'account',
+                class: 'button btn' %}
+
+            </div>
+          </div>
+          <div class="col-md-6 mb-5">
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                class: 'button--sm' %}
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                icon: 'search',
+                class: 'btn--with-icon button--sm' %}
+            </div>
+            <div class="d-md-inline-block mb-2">
+              {% render 'button',
+                snippet: true,
+                type: 'icon',
+                icon: 'cart',
+                class: 'button btn button--sm' %}
+            </div>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="button button--secondary">build your prescription</a>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="button button--secondary disabled">build your prescription</a>
+          </div>
+        </div>
+        <div class="row p-5">
+          <div class="col-md-6 mb-5 ">
+            <a href="#" class="button button--sm">customize</a>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="button button--sm disabled">customize</a>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="button button--secondary button--sm">view more</a>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="button button--secondary button--sm disabled">view more</a>
+          </div>
+          <div class="col-md-6 mb-5">
+            <a href="#" class="link">add try on</a>
+          </div>
+        </div>
+        <table>
+          <tbody>
+          <tr>
+            <th>Employee</th>
+            <th>Salary</th>
+            <th>Salary</th>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://example.com/">Jane</a>
+            </td>
+            <td>$1</td>
+            <td>Because that's all Steve Job' needed for a salary.</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://example.com/">John</a>
+            </td>
+            <td>$100K</td>
+            <td>For all the blogging he does.</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://example.com/">Jane</a>
+            </td>
+            <td>$100M</td>
+            <td>Pictures are worth a thousand words, right? So Tom x 1,000.</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://example.com/">Jane</a>
+            </td>
+            <td>$100B</td>
+            <td>With hair like that?! Enough said...</td>
+          </tr>
+          </tbody>
+        </table>
+        <dl>
+          <dt>Definition List Title:</dt>
+          <dd>Definition list division.</dd>
+          <dt>Startup:</dt>
+          <dd>A startup company or startup is a company or temporary organization designed to search for a repeatable and
+            scalable business model.
+          </dd>
+          <dt>#dowork:</dt>
+          <dd>Coined by Rob Dyrdek and his personal body guard Christopher "Big Black" Boykins, "Do Work" works as a self
+            motivator, to motivating your friends.
+          </dd>
+          <dt>Do It Live:</dt>
+          <dd>I'll let Bill O'Reilly will <a title="We'll Do It Live" href="https://www.youtube.com/watch?v=O_HyZ5aW76c">explain</a>
+            this one.
+          </dd>
+        </dl>
+        <ul>
+          <li>List item one
+            <ul>
+              <li>List item one
+                <ul>
+                  <li>List item one</li>
+                  <li>List item two</li>
+                  <li>List item three</li>
+                  <li>List item four</li>
+                </ul>
+              </li>
+              <li>List item two</li>
+              <li>List item three</li>
+              <li>List item four</li>
+            </ul>
+          </li>
+          <li>List item two</li>
+          <li>List item three</li>
+          <li>List item four</li>
+        </ul>
+        <ol>
+          <li>List item one
+            <ol>
+              <li>List item one
+                <ul>
+                  <li>List item one</li>
+                  <li>
+                    List item two
+                    <ul>
+                      <li>List item one</li>
+                      <li>List item two</li>
+                      <li>List item three</li>
+                      <li>List item four</li>
+                    </ul>
+                  </li>
+                  <li>List item three</li>
+                  <li>List item four</li>
+                </ul>
+              </li>
+              <li>List item two</li>
+              <li>List item three</li>
+              <li>List item four</li>
+            </ol>
+          </li>
+          <li>List item two</li>
+          <li>List item three</li>
+          <li>List item four</li>
+        </ol>
+
+        <div class="row">
+          <div class="col-sm-4 mb-4">
+            <h4>Image lazyload asset_img_url</h4>
+            {% render
+              'image',
+              asset_img_url: true,
+              src: 'img-placeholder.png',
+              d: '688x',
+              src_m: 'img-placeholder.png',
+              m: '375x' %}
+          </div>
+          <div class="col-sm-4 mb-4">
+            <h4>Image lazyload asset_img_url with fixed sizes image placeholder</h4>
+            {% render
+              'image',
+              asset_img_url: true,
+              src: 'img-placeholder.png',
+              d: '688x600',
+              src_m: 'img-placeholder.png',
+              m: '375x300',
+              placeholder: 'img-placeholder.png',
+              p_d: '688x600',
+              p_m: '375x300' %}
+          </div>
+          <div class="col-sm-4 mb-4">
+            <h4>Image lazyload asset_img_url</h4>
+            {% render
+              'image',
+              asset_img_url: true,
+              src: 'img-placeholder.png',
+              d: '688x',
+              src_m: 'img-placeholder.png',
+              m: '375x' %}
+          </div>
+          <div class="col-sm-4 mb-4">
+            <h4>Image placeholder</h4>
+            <picture>
+              <img src="https://via.placeholder.com/203x115" class="lazyload" data-sizes="auto" alt="image description"
+                   src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            </picture>
+          </div>
+        </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen=""></iframe>
+      </div>
+    </div>
+  </div>

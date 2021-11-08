@@ -1,0 +1,71 @@
+<section class="section map-section">
+  <div class="container-fluid px-md-0">
+    <div class="map-section__block d-md-flex align-items-md-center position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-lg-4">
+            {% if section.settings.title != blank or section.settings.address != blank or section.settings.map_url != blank %}
+              <div class="map-section__content text-center">
+                {% if section.settings.title != blank %}
+                  <h2 class="h3 mb-2">{{ section.settings.title }}</h2>
+                {% endif %}
+                {% if section.settings.address != blank %}
+                  <address class="map-section__text-box rte">
+                    {{ section.settings.address }}
+                  </address>
+                {% endif %}
+                {% if section.settings.map_btn_url != blank %}
+                  {% render "button",
+                    element: 'a',
+                    href: section.settings.map_btn_url,
+                    class: 'd-inline-flex flex-row-reverse align-items-center',
+                    locales_text: 'contact.location'
+                    text: 'Get directions',
+                    snippet: true,
+                    icon: 'location'
+                  %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="map-section__img-holder map-section__img-holder--map-active">
+        <div class="map-section__img"></div>
+        <div id="google-map" class="map-section__google-map"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script async src="https://maps.googleapis.com/maps/api/js?key={{ settings.gm_key }}&callback=initMap&libraries=&v=weekly"></script>
+
+{% schema %}
+  {
+    "name": "Google map",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Our store"
+      },
+      {
+        "type": "richtext",
+        "id": "address",
+        "label": "Address",
+        "default": "<p>123 Fake St.<br>Toronto, Canada</p>"
+      },
+      {
+        "type": "url",
+        "id": "map_btn_url",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Google map",
+        "category": "Location"
+      }
+    ]
+  }
+{% endschema %}

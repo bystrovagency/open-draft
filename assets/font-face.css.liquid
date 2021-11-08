@@ -1,0 +1,81 @@
+{%- if settings.hardcoded_font_swap or settings.custom_font_swap -%}
+  {%- capture font_swap -%}font-display: swap;{%- endcapture -%}
+{%- endif -%}
+
+{% if settings.font_library == 'custom' %}
+  @font-face {
+    font-family: '{{ settings.custom_font_heading }}';
+    src: url({{ settings.custom_font_heading | append:'.woff2' | asset_url }}) format('woff2'),
+         url({{ settings.custom_font_heading | append:'.woff' | asset_url }}) format('woff');
+    font-weight: {{ settings.custom_heading_weight }};
+    font-style: {{ settings.custom_heading_style }};
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: '{{ settings.custom_font_body }}';
+    src: url({{ settings.custom_font_body | append:'.woff2' | asset_url }}) format('woff2'),
+         url({{ settings.custom_font_body | append:'.woff' | asset_url }}) format('woff');
+    font-weight: {{ settings.custom_body_weight }};
+    font-style: {{ settings.custom_body_style }};
+    {{ font_swap }}
+  }
+{% endif %}
+
+{% if settings.font_library == 'hardcoded' %}
+  @font-face {
+    font-family: 'Neutraface';
+    src: url({{'NeutrafaceText-Light.woff2' | asset_url}}) format('woff2'),
+         url({{'NeutrafaceText-Light.woff' | asset_url}}) format('woff');
+    font-weight: 300;
+    font-style: normal;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Neutraface';
+    src: url({{'NeutrafaceText-LightItalic.woff2' | asset_url}}) format('woff2'),
+         url({{'NeutrafaceText-LightItalic.woff2' | asset_url}}) format('woff');
+    font-weight: 300;
+    font-style: italic;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Neutraface';
+    src: url({{'NeutrafaceText-Book.woff2' | asset_url}}) format('woff2'),
+         url({{'NeutrafaceText-Book.woff' | asset_url}}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Neutraface';
+    src: url({{'NeutrafaceText-Demi.woff2' | asset_url}}) format('woff2'),
+         url({{'NeutrafaceText-Demi.woff' | asset_url}}) format('woff');
+    font-weight: 600;
+    font-style: normal;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Neutraface';
+    src: url({{'NeutrafaceText-Bold.woff2' | asset_url}}) format('woff2'),
+         url({{'NeutrafaceText-Bold.woff' | asset_url}}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Didot';
+    src: url({{'Didot.woff2' | asset_url}}) format('woff2'),
+        url({{'Didot.woff' | asset_url}}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    {{ font_swap }}
+  }
+  @font-face {
+    font-family: 'Didot';
+    src: url({{'Didot-Italic.woff2' | asset_url}}) format('woff2'),
+        url({{'Didot-Italic.woff' | asset_url}}) format('woff');
+    font-weight: normal;
+    font-style: italic;
+    {{ font_swap }}
+  }
+{% endif %}

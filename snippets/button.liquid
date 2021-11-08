@@ -1,0 +1,99 @@
+{% comment %}theme-check-disable{% endcomment %}
+{% comment %}
+  NOTE:
+    Renders a button
+    Accepts:
+    - href: {string} link for button (default is '#')
+    - element: {string} to define which element you want to be rendered ('a', 'button', 'input', 'span', default is 'a')
+    - class: {string} for adding additional classes (should be separated with space, example 'class1 class2')
+    - text: {string} override button label (default is 'Button')
+    - locales_text: {string} used for including text from locales, instead of {{ 'products.product.quantity' | t }}
+                    write 'products.product.quantity')
+    - type: {string} define witch type of input you want to be rendered ('submit', 'reset', 'button', 'icon', default is 'button')
+    - data_attribute: {string} for adding data attributes.
+                  If you want more than one it should be separated with space (example 'data-fancybox data-custom-attr')
+    - snippet: {string} for adding icons or other snippets (except element 'input')
+    - icon: {string} passed for a snippet as a parametr (will be rendered as {% render 'snippet-name' with 'icon' %})
+    - other: {string} for other parameters (example 'name="test" disabled="disabled"') only for button type 'button' and 'input'
+    for usage:
+    {% render "button",
+      element: 'a',
+      href: '/',
+      class: 'class2 class3',
+      text: 'text',
+      data_attribute: 'data-text'
+    %}
+    with locales text
+    {% render "button",
+      element: 'a',
+      href: '/',
+      class: 'class2 class3',
+      locales_text: 'products.product.quantity',
+      data_attribute: 'data-text'
+    %}
+    usage with snippet:
+    {% render "button",
+      element: 'a',
+      href: '/',
+      class: 'class2 class3',
+      text: 'text',
+      data_attribute: 'data-text',
+      snippet: 'snippet-name',
+      icon: 'name'
+    %}
+
+{% endcomment %}
+
+{%- capture classes -%}
+  {{- settings.button_size | append: ' ' | append: class | rstrip -}}
+{%- endcapture -%}
+{% assign element = element | default: "a" %}
+
+{%- capture text_content -%}
+  {%- if locales_text -%}
+    {{- locales_text | t -}}
+   {% else %}
+    {{- text | default: 'Button' -}}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture content -%}
+  {% if type == 'icon' %}
+    {%- if snippet -%}
+      {% render 'icon' with icon %}
+    {%- endif -%}
+   {% else %}
+     {{- text_content -}}
+     {%- if snippet -%}
+       {% render 'icon' with icon %}
+     {%- endif -%}
+  {% endif %}
+{%- endcapture -%}
+
+{% capture type_attr %}
+  {% if type == 'icon' %}
+    text="{{ icon }}"
+  {% else %}
+    type="{{ type | default: "button" }}"
+  {% endif %}
+{% endcapture %}
+
+{%- case element -%}
+{%- when 'a' -%}
+  <a href="{{ href | default: '#' }}" class="{{ classes }}" {{ data_attribute }}>
+    {{- content -}}
+  </a>
+{%- when 'button' -%}
+  <button {{ type_attr }} class="{{ classes }}" {{ data_attribute }} {{ other }}>
+    {{- content -}}
+  </button>
+{%- when 'span' -%}
+  <span class="{{ classes }}" {{ data_attribute }}>
+      {{- content -}}
+    </span>
+{%- when 'input' -%}
+  <input {{ type_attr }}
+         class="{{ classes }}" {{ data_attribute }}
+         value="{{ text | default: "Button" }} {{ other }}"/>
+{%- endcase -%}
+{% comment %}theme-check-enable{% endcomment %}

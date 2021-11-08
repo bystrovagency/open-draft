@@ -1,0 +1,63 @@
+{% render 'section-plans', title: page.title, text: page.content %}
+
+{% schema %}
+{
+  "name": "Plans",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Plan",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subheading",
+          "default": "Internet"
+        },
+        {
+          "type": "html",
+          "id": "features",
+          "label": "Features",
+          "default": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$24.99"
+        },
+        {
+          "type": "text",
+          "id": "period",
+          "label": "Period",
+          "default": "month"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link",
+          "info": "Button is disabled if empty"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

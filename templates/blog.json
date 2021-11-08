@@ -1,0 +1,11 @@
+{
+  "name": "blog",
+  "sections": {
+    "main": {
+      "type": "blog-template"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

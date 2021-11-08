@@ -1,0 +1,106 @@
+{% for item in cart.items %}
+
+  {% comment %}
+
+  Cart Item Template
+  =====================
+  The data-label attributes on <td> elements are mobile-friendly
+  helpers used for responsive-table labels
+  {% endcomment %}
+
+  <tr class="responsive-table-row"
+      data-line-item
+      data-index="{{ forloop.index }}"
+      data-key="{{ item.key }}">
+
+    <td>
+      <div class="row">
+        <div class="col-4 col-md-3">
+          {% if item.image != blank %}
+            <div class="cart__product-img">
+              <a href="{{ item.url | within: collections.all }}">
+                <picture>
+                  <source data-srcset="{{ item | img_url: '120x' }}, {{ item | img_url: '240x' }} 2x"
+                          media="(max-width: 767px)"
+                          srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <source data-srcset="{{ item | img_url: '240x' }}, {{ item | img_url: '480x' }} 2x"
+                          srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                  <img data-src="{{ item | img_url: '240x' }}" class="lazyload" data-sizes="auto" alt="{{ item.title }}"
+                       src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                </picture>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+        <div class="col-8 col-md-9">
+          <div class="cart__product-text">
+            <a href="{{ item.url }}" class="cart__product-link">
+              <strong>
+                {{ item.product.title }}
+              </strong>
+            </a>
+
+            {% unless item.product.has_only_default_variant %}
+              <p>{{ item.variant.title }}</p>
+            {% endunless %}
+
+            <p>{{ item.vendor }}</p>
+
+            {% liquid
+              assign property_size = item.properties | size
+              if property_size > 0
+                for p in item.properties
+                  unless p.last == blank
+                    echo p.first
+                    if p.last contains '/uploads/'
+                      echo '<a href="' | append: p.last | append: '">' | append: p.last | split: '/' | last | append: '</a >'
+                    else
+                      echo p.last
+                    endif
+                  endunless
+                endfor
+              endif
+            %}
+            <a href="/cart/change?line ={{ forloop.index }}&amp;quantity = 0" data-remove-item>
+              <small>{{ 'cart.general.remove' | t }}</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="mb-4 mb-md-0">
+        {% if item.original_line_price != item.line_price %}
+          <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+          {{ item.price | money }}
+          <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+          <s>{{ item.original_price | money }}</s>
+        {% else %}
+          {{ item.price | money }}
+        {% endif %}
+      </div>
+      <div class="d-flex d-md-none align-items-center justify-content-end">
+        <label for="updates_mobile_{{ item.key }}" class="mr-2">Qty</label>
+        <input type="number"
+               name="updates[]"
+               data-key="{{ item.key }}"
+               id="updates_mobile_{{ item.key }}"
+               value="{{ item.quantity }}"
+               min="0"
+               aria-label="{{ 'cart.general.item_quantity' | t }}">
+      </div>
+    </td>
+    <td>
+      <input type="number"
+             name="updates[]"
+             id="updates_{{ item.key }}"
+             value="{{ item.quantity }}"
+             min="0"
+             aria-label="{{ 'cart.general.item_quantity' | t }}">
+    </td>
+    <td data-line-total-price>
+      {{ item.line_price | money }}
+    </td>
+  </tr>
+
+{% endfor %}

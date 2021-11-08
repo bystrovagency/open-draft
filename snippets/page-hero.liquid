@@ -1,0 +1,12 @@
+{% if image != blank %}
+  <div class="page-hero">
+    {% render
+      'image',
+      src: image,
+      d: '1440x300',
+      src_m: image,
+      m: '375x200',
+      placeholder: 'img-placeholder.png'
+  %}
+  </div>
+{% endif %}

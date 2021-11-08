@@ -1,0 +1,293 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available in the "Header" section in the theme editor.
+
+  Theme Store required settings
+  - Show announcement
+  - Text: message to announce
+  - Link: link of the announcement bar
+
+  Theme Store optional settings
+  - Home page only: only shows on the home page
+{%- endcomment -%}
+
+<header id="header">
+  {% render 'header-announcement' %}
+  <div class="header__panel{% if section.settings.enable_shadow %} header__panel-shadow{% endif %}">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-4 {% if section.settings.layout == 'center' %}col-lg-5{% else %}col-lg-6 order-lg-2 justify-content-center{% endif %}">
+          <div class="menu">
+            <div class="d-flex d-lg-none align-items-center">
+              {% if section.settings.menu != blank %}
+                <a href="#" class="menu__opener menu__btn-opener page-wrapper__opener">
+                  <span>Menu</span>
+                </a>
+              {% endif %}
+              {% if section.settings.search_enable %}
+                <a href="{{ routes.search_url }}" class="header__btn d-none d-xs-inline-flex d-lg-none">
+                  <span class="visually-hidden">
+                    Search
+                  </span>
+                  {%- render 'icon' with 'search' -%}
+                </a>
+              {% endif %}
+            </div>
+            {% if section.settings.menu != blank %}
+              <nav class="menu__drop d-none d-lg-block">
+                <ul id="nav" class="main-menu menu-accordion">
+                  {% render 'nav-menu' %}
+                </ul>
+              </nav>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-4 {% if section.settings.layout == 'center' %}col-lg-2{% else %}col-lg-3 order-lg-1 d-lg-flex flex-lg-wrap align-items-center justify-content-start{% endif %}">
+          {% render 'header-logo' %}
+        </div>
+        <nav class="col-4 {% if section.settings.layout == 'center' %}col-lg-5{% else %}col-lg-3 order-lg-3 py-lg-3{% endif %} d-flex flex-wrap align-items-center justify-content-end">
+          {% if section.settings.button_link != blank %}
+            {% render "button",
+              element: 'a',
+              href: section.settings.button_link,
+              class: 'button d-none d-lg-block',
+              text: section.settings.button_label %}
+          {% endif %}
+          {% render 'header-icons' %}
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="menu__drop d-lg-none">
+  {% render 'header-announcement' %}
+  <div class="header__panel-mobile">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-4 col-lg-3">
+          <div class="menu">
+            <div class="d-flex d-lg-none align-items-center">
+              <a href="#" class="menu__opener menu__btn-opener page-wrapper__opener">
+                <span>Menu</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 col-lg-6">
+          {% render 'header-logo' %}
+        </div>
+        <nav class="col-4 col-lg-3 d-flex flex-wrap align-items-center justify-content-end">
+          {% render 'header-icons' %}
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {% if section.settings.enable_search_form %}
+      <form action="/search" method="get" role="search" class="header__search-form">
+        <input type="search"
+               name="q"
+               id="Search"
+               value="{{ search.terms | escape }}"
+               placeholder="{{ 'general.search.placeholder' | t }}">
+        {% render 'button',
+          element: 'button',
+          class: 'btn page-search-form__button d-flex align-items-center',
+          text: 'Search on store',
+          snippet: true,
+          icon: 'search'
+        %}
+      </form>
+    {% endif %}
+    <ul class="main-menu menu-accordion">
+      {% render 'nav-menu' %}
+    </ul>
+    <ul class="main-menu menu-accordion d-block d-lg-none">
+      {% render 'nav-account-menu' %}
+    </ul>
+  </div>
+</nav>
+
+<style media="screen">
+  .header__bar {
+    background: {{ section.settings.announcement_bar_bg_color }} !important;
+    color: {{ section.settings.announcement_bar_text_color }} !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_bar_enabled",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_bar_home_page_only",
+      "label": "Show on home page only",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "announcement_bar_text",
+      "label": "Announcement text",
+      "default": "Announce something here"
+    },
+    {
+      "type": "url",
+      "id": "announcement_bar_link",
+      "label": "Announcement link",
+      "info": "Optional"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_bg_color",
+      "label": "Announcement bar bg color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_text_color",
+      "label": "Announcement bar text color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "logo_svg",
+      "label": "SVG logo",
+      "default": "logo-2.svg",
+      "info": "Grabs image from assets example (logo.svg including file extension)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Draft"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Logo alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "search_enable",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search_form",
+      "label": "Show search form on mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_enable",
+      "label": "Show cart icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_account_icon",
+      "label": "Show account icon",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Button is disabled if empty"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Submit an inquiry"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable shadow effect",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append: 'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+
+
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+
+
+  </script>
+{% endif %}

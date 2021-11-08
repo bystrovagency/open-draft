@@ -1,0 +1,11 @@
+{
+  "name": "page.typography",
+  "sections": {
+    "main": {
+      "type": "typography-template"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

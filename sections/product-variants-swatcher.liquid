@@ -1,0 +1,29 @@
+<div class="pt-6 pt-md-7">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+  </div>
+</div>
+<section data-section-id="{{ section.id }}" class="section page-section" data-section-type="product-variants-swatcher">
+</section>
+
+{% render "dynamic-checkout" with product %}
+
+<script type="application/json" id="product-json">
+    {% render 'product-json' %}
+</script>
+
+{% render 'schema' %}
+
+{% schema %}
+{
+    "name": "Product pages",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show_share_buttons",
+    "label": "Show social sharing buttons",
+    "default": true
+    }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "name": "Tariffs",
+  "sections": {
+    "main": {
+      "type": "page-tariffs"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

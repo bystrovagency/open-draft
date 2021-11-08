@@ -1,0 +1,109 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+  <select name="id" id="size" class="d-none">
+    {% for variant in product.variants %}
+      <option
+              {% if variant == current_variant %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled="disabled"{% endunless %}
+              value="{{ variant.id }}">
+        {{ variant.title }}
+      </option>
+    {% endfor %}
+  </select>
+  <div class="product__price">
+    <div class="product__price__box d-flex flex-wrap align-items-center" data-price-wrapper>
+      {% if product.compare_at_price_max > product.price %}
+        <ins data-product-price>
+          {{ current_variant.price | money }}
+        </ins>
+        <span class="accessibility" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <del data-compare-price>
+            {{ current_variant.compare_at_price | money }}
+          </del>
+        {% endif %}
+      {% else %}
+        <div data-product-price>
+          {{ current_variant.price | money }}
+        </div>
+      {% endif %}
+    </div>
+    {{ form | payment_terms }}
+    {% comment %}
+      <div class="product__price__text">
+      <p>Tax included.</p>
+    </div>
+    {% endcomment %}
+  </div>
+  <div class="product__row">
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        <div class="row mb-2">
+          <div class="col-sm-7 col-lg-5">
+            {% assign size_option = 'products.product.size' | t | downcase %}
+            {% assign options = product.options | downcase %}
+            {% if forloop.first and show_size_chart and size_chart_url != blank and options contains size_option %}
+              <a class="size-chart-link"
+                 data-type="ajax"
+                 href="{{ size_chart_url }}">{{ 'products.product.size_chart' | t }}</a>
+            {% endif %}
+            <label class="product__label" for="Option{{ option.position }}">
+              {% if show_variant_label %}
+                {{ option.name }}
+              {% endif %}
+            </label>
+            <select
+                    class="product__select w-100"
+                    id="Option{{ option.position }}"
+                    name="options[{{ option.name | escape }}]">
+              {% for value in option.values %}
+                <option
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}selected="selected"{% endif %}>
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      {% endfor %}
+    {% endunless %}
+    {% if show_quantity %}
+      <div class="row">
+        <div class="col-sm-7 col-lg-5">
+          <label class="product__label" for="Quantity">{{ 'products.product.quantity' | t }}</label>
+          <input type="number" id="Quantity" class="w-100" name="quantity" value="1" min="1">
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="row">
+    <div class="col-sm-7 col-lg-5">
+      <div class="product__row">
+        {% if current_variant.available %}
+          {% render 'button',
+            element: 'button',
+            locales_text: 'products.product.add_to_cart',
+            data_attribute: 'data-submit-button',
+            class: 'w-100',
+            name: 'add',
+            other: 'name="add"',
+            type: 'submit' %}
+        {% else %}
+          {% render 'button',
+            element: 'button',
+            locales_text: 'products.product.sold_out',
+            data_attribute: 'data-submit-button',
+            class: 'w-100 disabled',
+            other: 'name="add" disabled',
+            type: 'submit' %}
+        {% endif %}
+      </div>
+      {% if show_dynamic_button %}
+        <div class="product__row">
+          {{ form | payment_button }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endform %}

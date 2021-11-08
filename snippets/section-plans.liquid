@@ -1,0 +1,56 @@
+<div class="section plans">
+  <div class="container">
+    {% if title != blank or text != blank %}
+      <div class="plans__heading-box text-center">
+        {% if title != blank %}
+          <h2>{{ title }}</h2>
+        {% endif %}
+        {{ text }}
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="plans__items-row">
+        <div class="row justify-content-md-center">
+          {% for block in section.blocks %}
+            <div class="col-md-4" {{ block.shopify_attributes }}>
+              <div class="plan-item text-center">
+                {% if block.settings.subtitle != blank %}
+                  <div class="mb-2">{{ block.settings.subtitle }}</div>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h3 class="h5 plan-item__title">{{ block.settings.title }}</h3>
+                {% endif %}
+                <div class="plan-item__img">
+                  {% if block.settings.image != blank %}
+                    {% render
+                      'image',
+                      src: block.settings.image,
+                      d: '50x',
+                      placeholder: 'img-placeholder.png'
+                    %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+                {{ block.settings.features }}
+                {% if block.settings.period != blank or block.settings.price != blank %}
+                  <ul class="plan-item__price">
+                    {% if block.settings.price != blank %}
+                      <li>{{ block.settings.price }}</li>
+                    {% endif %}
+                    {% if block.settings.period != blank %}
+                      <li>{{ block.settings.period }}</li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+                {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+                  <a href="{{ block.settings.button_link }}" class="button">{{ block.settings.button_label }}</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

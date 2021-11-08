@@ -1,0 +1,109 @@
+{% assign section_onboarding = false %}
+{% if product == empty %}
+  {%- assign section_onboarding = true -%}
+{% endif %}
+
+<section data-section-id="{{ section.id }}"
+         class="section page-section"
+         data-section-type="product"
+         data-handle="{{ product.handle }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0">
+        {% unless section_onboarding %}
+          <div class="splide product-gallery">
+            <div class="splide__track">
+              <div class="splide__list align-items-center">
+                {% if product.media.size > 0 %}
+                  {% for media in product.media %}
+                    {% render 'product-media' media: media, main: true %}
+                  {% endfor %}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="splide product-gallery-thumbs">
+          {% if product.media.size > 1 %}
+          <div class="splide__track">
+            <div class="splide__list align-items-center">
+              {% for media in product.media %}
+                {% render 'product-media' media: media %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endunless %}
+      </div>
+      <div class="col-md-6">
+        {% unless section_onboarding %}
+          <h1 class="product__title">{{ product.title }}</h1>
+        {% else %}
+          <h1 class="product__title">{{ 'homepage.onboarding.product_title' | t }}</h1>
+        {% endunless %}
+        {% if section.settings.show_vendor %}
+          <div class="product__vendor mb-1 mb-md-2">{{ product.vendor }}</div>
+        {% endif %}
+        {% unless section_onboarding %}
+          {% render 'product-form',
+            product: product,
+            show_quantity: section.settings.show_quantity,
+            show_variant_label: section.settings.show_variant_label,
+            show_size_chart: section.settings.show_size_chart,
+            size_chart_url: section.settings.size_chart_url,
+            show_dynamic_button: section.settings.show_dynamic_button
+          %}
+        {% else %}
+          <form >
+            <div class="product__price">
+              <div class="product__price__box d-flex flex-wrap align-items-center" data-price-wrapper>
+                <div data-product-price>
+                  {{ 1999 | money }}
+                </div>
+                  <span class="accessibility" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                  <del data-compare-price>
+                    {{ 29999 | money }}
+                  </del>
+              </div>
+              {% comment %}
+               <div class="product__price__text">
+                <p>Tax included.</p>
+              </div>
+              {% endcomment %}
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="product__row">
+                  {% render 'button',
+                    element: 'button',
+                    locales_text: 'products.product.sold_out',
+                    data_attribute: 'data-submit-button',
+                    class: 'w-100 disabled',
+                    other: 'name="add" disabled',
+                    type: 'submit' %}
+                </div>
+              </div>
+            </div>
+          </form>
+        {% endunless %}
+        
+        <div class="product__row rte">
+          {% if product.description %}
+            {{ product.description }}
+          {% else %}
+            {{ 'homepage.onboarding.product_description' | t }}
+          {% endif %}
+        </div>
+        
+        {% if section.settings.show_share_buttons %}
+          {% render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {%- render 'cart-popup' -%}
+</section>

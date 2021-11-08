@@ -1,0 +1,31 @@
+{% for link in linklists[section.settings.menu].links %}
+  {% if link.links != blank and link.levels == 2 %}
+    <li class="has-drop">
+      <a href="{{ link.url }}" class="menu-accordion__opener">{{ link.title }}</a>
+      <div class="menu-accordion__slide">
+        <div class="container">
+          <div class="row">
+            {% for child_link in link.links %}
+              <div class="col-lg-3">
+                <div class="h5 h">{{ child_link.title }}</div>
+                {% if child_link.links != blank %}
+                  <ul>
+                    {% for third_level in child_link.links %}
+                      <li {% if third_level.active %}class="active"{% endif %}>
+                        <a href="{{ third_level.url }}">{{ third_level.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </li>
+  {% else %}
+    <li {% if link.active %}class="active"{% endif %}>
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    </li>
+  {% endif %}
+{% endfor %}

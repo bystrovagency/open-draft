@@ -1,0 +1,63 @@
+{% liquid
+  assign limit = settings.limit
+  assign products = collection.products
+
+  render 'page-hero', image: collection.image
+  render 'breadcrumbs'
+%}
+
+{% paginate collection.products by limit %}
+  <div class="section page-section"
+       data-section-id="{{ section.id }}"
+       data-section-type="collection"
+       data-infinite="{{ section.settings.enable_infinite }}"
+       data-products-quantity="{{ collection.products_count }}">
+    <div class="container">
+      <div class="page-title-block text-center pt-0">
+        <h1 class="h2 mb-2">{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div class="rte text-size-md">
+            {{ collection.description }}
+          </div>
+        {% endif %}
+      </div>
+      {% if products.size == 0 %}
+        <div class="text-center py-5">
+          {{ 'collections.general.no_matches' | t }}
+        </div>
+      {% else %}
+        <div class="row py-4 js-products-wrapper">
+          {% liquid
+            for product in collection.products
+              render "product-card", product: product, grid_item_width: 'col-6 col-lg-3'
+            endfor
+          %}
+        </div>
+      {% endif %}
+      {% if section.settings.enable_infinite %}
+        <div class="spinner-holder">
+          <div class="spinner"></div>
+        </div>
+      {% else %}
+        {% if paginate.pages > 1 %}
+          {% render 'pagination', paginate: paginate %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_infinite",
+      "label": "Enable infinite scroll",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,224 @@
+{
+  "sections": {
+    "home_hero": {
+      "type": "home-hero",
+      "settings": {
+        "image": "shopify://shop_images/Untitled_design.png",
+        "title": "Image with text overlay",
+        "alignment": "justify-content-start align-items-center",
+        "alignment_text": "text-center",
+        "text": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>",
+        "color": "#000000",
+        "color_mobile": "#000000",
+        "button_link": "shopify://collections",
+        "button_label": "Read more",
+        "fullheight": false
+      }
+    },
+    "home_featured_collection": {
+      "type": "home-featured-collection",
+      "settings": {
+        "title": "Featured collection",
+        "collection": "test",
+        "grid": 4,
+        "rows": 2,
+        "show_view_all": true
+      }
+    },
+    "home_image_with_text": {
+      "type": "home-image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/working-at-night.jpg",
+        "layout": "",
+        "title": "Image with text",
+        "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p><p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p><p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+        "button_label": "Shop now",
+        "button_link": "shopify://products/apple-macbook-pro-16-1tb-2019-silver"
+      }
+    },
+    "1634890565a5ef6742": {
+      "type": "home-image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/woman-works-on-computer-at-home.jpg",
+        "layout": "flex-md-row-reverse",
+        "title": "Image with text",
+        "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+        "button_label": "Shop now",
+        "button_link": "shopify://products/bird-scarf-product"
+      }
+    },
+    "home_logos_list": {
+      "type": "home-logos-list",
+      "blocks": {
+        "image1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "url": "shopify://collections/all"
+          }
+        },
+        "image3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "url": "shopify://collections/all"
+          }
+        },
+        "image2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "url": "shopify://collections/all"
+          }
+        },
+        "image4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": ["image1", "image3", "image2", "image4"],
+      "settings": {
+        "title": "Logo list"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "section_title": "Subscribe to our newsletter",
+        "subheading": "A short sentence describing what someone will receive by subscribing"
+      }
+    },
+    "home_benefits": {
+      "type": "home-benefits",
+      "blocks": {
+        "image1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        },
+        "image2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        },
+        "image3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        },
+        "image4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        },
+        "image5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        },
+        "image6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+            "title": "Ultra-speed Connection"
+          }
+        }
+      },
+      "block_order": [
+        "image1",
+        "image2",
+        "image3",
+        "image4",
+        "image5",
+        "image6"
+      ],
+      "settings": {}
+    },
+    "home_plans": {
+      "type": "home-plans",
+      "blocks": {
+        "image1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "title": "Heading",
+            "subtitle": "Internet",
+            "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+            "price": "$24.99",
+            "period": "month",
+            "button_link": "shopify://collections/all",
+            "button_label": "Get started"
+          }
+        },
+        "image2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "title": "Ultra-speed Connection",
+            "subtitle": "Internet",
+            "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+            "price": "$24.99",
+            "period": "month",
+            "button_link": "shopify://collections/all",
+            "button_label": "Get started"
+          }
+        },
+        "image3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+            "title": "Ultra-speed Connection",
+            "subtitle": "Internet",
+            "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+            "price": "$24.99",
+            "period": "month",
+            "button_link": "shopify://collections/all",
+            "button_label": "Get started"
+          }
+        }
+      },
+      "block_order": ["image1", "image2", "image3"],
+      "settings": {
+        "title": "Choose your plan",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>"
+      }
+    },
+    "home_iframe_video": {
+      "type": "home-iframe-video",
+      "settings": {
+        "video": "https://vimeo.com/420059153",
+        "enable_full_width": true,
+        "title": "",
+        "subheading": "",
+        "button_link": "",
+        "button_label": "Button",
+        "enable_overlay": false,
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "home_hero",
+    "home_featured_collection",
+    "home_image_with_text",
+    "1634890565a5ef6742",
+    "home_logos_list",
+    "newsletter",
+    "home_benefits",
+    "home_plans",
+    "home_iframe_video"
+  ]
+}

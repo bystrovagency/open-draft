@@ -1,0 +1,162 @@
+<div class="section page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-lg-9">
+        <article role="article" class="post post--single">
+          <header role="banner" class="post__header">
+            <h1 class="post__title">{{ article.title }}</h1>
+            <div class="post__date">
+              {{ article.published_at | time_tag: format: 'month_day_year' }}
+            </div>
+            {% if blog.comments_enabled? %}
+              <a href="#comments" class="anchor-link">{{ 'blogs.comments.with_count' | t: count: article.comments_count }}</a>
+            {% endif %}
+          </header>
+          <div class="post__img">
+            {% render
+              'image',
+              src: article.image.src,
+              d: '857x',
+              src_m: article.image.src,
+              m: '375x'
+            %}
+          </div>
+          <div class="post__text-block rte">
+            {{ article.content }}
+          </div>
+          {% if settings.social_sharing_blog %}
+            {% render 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+          {% endif %}
+        </article>
+        {% if article.comments_enabled? %}
+          <div id="comments" class="post__discussion">
+            <h2 class="h3">{{ 'blogs.comments.block_title' | t }}</h2>
+            <ul>
+              {% for comment in article.comments %}
+                <li>
+                  <div class="post__comment rte">
+                    <div class="mb-3">
+                      <strong>{{ comment.author }}</strong>
+                      <div>
+                        {{ comment.created_at | time_tag: format: 'month_day_year_time' }}
+                      </div>
+                    </div>
+                    {{ comment.content }}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% form 'new_comment', article %}
+            <h2 class="h3">{{ 'blogs.comments.title' | t }}</h2>
+            {{ form.errors | default_errors }}
+            {% if comment and comment.status and comment.id != blank %}
+              <p class="form-success">
+                {% if blog.moderated? and comment.status != 'published' %}
+                  {{ 'blogs.comments.success_moderated' | t }}
+                {% else %}
+                  {{ 'blogs.comments.success' | t }}
+                {% endif %}
+              </p>
+            {% endif %}
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="input-holder">
+                  <label for="CommentAuthor" class="label-hidden label">
+                    {{ 'blogs.comments.name' | t }}
+                  </label>
+                  <input type="text"
+                         name="comment[author]"
+                         id="CommentAuthor"
+                         class="{% if form.errors contains 'author' %}input-error{% endif %}"
+                         placeholder="{{ 'blogs.comments.name' | t }}"
+                         value="{{ form.author }}"
+                         autocapitalize="words">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="input-holder">
+                  <label for="CommentEmail" class="label-hidden label">
+                    {{ 'blogs.comments.email' | t }}
+                  </label>
+                  <input type="email"
+                         name="comment[email]"
+                         id="CommentEmail"
+                         class="{% if form.errors contains 'email' %}input-error{% endif %}"
+                         placeholder="{{ 'blogs.comments.email' | t }}"
+                         value="{{ form.email }}"
+                         spellcheck="false"
+                         autocomplete="off"
+                         autocapitalize="off">
+                </div>
+              </div>
+            </div>
+            <div class="input-holder">
+              <label for="CommentBody" class="label-hidden label">
+                {{ 'blogs.comments.message' | t }}
+              </label>
+              <textarea
+                name="comment[body]"
+                id="CommentBody"
+                class="{% if form.errors contains 'body' %}input-error{% endif %}"
+                placeholder="{{ 'blogs.comments.message' | t }}">
+                {{- form.body -}}
+              </textarea>
+            </div>
+            {% if blog.moderated? %}
+              <p>{{ 'blogs.comments.moderated' | t }}</p>
+            {% endif %}
+            <input type="submit" class="button" value="{{ 'blogs.comments.post' | t }}">
+          {% endform %}
+        {% endif %}
+      </div>
+      <!-- <div class="col-md-4 col-lg-3">
+        <aside class="aside">
+          <h3>Recent articles</h3>
+          <div class="aside__item">
+            <h4 class="mb-2">
+              <a href="#">Post title</a>
+            </h4>
+            <div>
+              <time datetime="2019-06-30">Posted on June 30, 2019</time>
+            </div>
+          </div>
+          <div class="aside__item">
+            <h4 class="mb-2">
+              <a href="#">Post title</a>
+            </h4>
+            <div>
+              <time datetime="2019-06-30">Posted on June 30, 2019</time>
+            </div>
+          </div>
+          <h3 class="mb-3">Tags</h3>
+          <div class="aside__item">
+            <ul class="aside__tags-list">
+              <li>
+                <a href="#">all</a>
+              </li>
+              <li>
+                <a href="#">tag 1</a>
+              </li>
+              <li>
+                <a href="#">tag 2</a>
+              </li>
+              <li>
+                <a href="#">tag 3</a>
+              </li>
+              <li>
+                <a href="#">tag 4</a>
+              </li>
+              <li>
+                <a href="#">tag 5</a>
+              </li>
+              <li>
+                <a href="#">tag 6</a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div> -->
+    </div>
+  </div>
+</div>

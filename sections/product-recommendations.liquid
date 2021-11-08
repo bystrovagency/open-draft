@@ -1,0 +1,68 @@
+{% if section.settings.show_product_recommendations %}
+  <div class="section"
+       id="product-recommendations"
+       data-section-type="product-recommendations"
+       data-section-id="{{ section.id }}"
+       data-product-id="{{ product.id }}"
+       data-limit="{{ section.settings.limit }}">
+    {%- if recommendations.products_count > 0 -%}
+      <div class="container">
+        <h2 class="text-center">{{ section.settings.title }}</h2>
+        <div class="row js-products">
+          {%- for product in recommendations.products -%}
+            {% render "product-card", product: product %}
+          {%- endfor -%}
+        </div>
+        {% if section.settings.button_link != blank %}
+          <div class="pt-sm-4 text-center">
+            {% render "button",
+              href: section.settings.button_link,
+              text: section.settings.button_label
+            %}
+          </div>
+        {% endif %}
+      </div>
+    {%- endif -%}
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Related products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_recommendations",
+        "label": "Turn on product recommendations",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "You may also like"
+      },
+      {
+        "type": "range",
+        "id":  "limit",
+        "min":  1,
+        "max":  8,
+        "step":  1,
+        "label":  "Limit",
+        "default": 4
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link",
+        "info": "Button is disabled if empty"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "back to home page"
+      }
+    ]
+  }
+{% endschema %}

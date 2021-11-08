@@ -1,0 +1,30 @@
+{%- liquid
+  if product.title
+    assign compare_at_price = product.compare_at_price
+    assign price = product.price
+    assign variant_min_price = product.selected_or_first_available_variant.price | money
+  else
+    assign compare_at_price = 2999
+    assign price = 1999
+  endif
+
+  assign money_price = price | money
+-%}
+
+<div class="product-item__price">
+  {% if product.price_varies %}
+    {{ 'products.product.starting_at' | t }}
+    {% if product.price_min > 0 %}
+      {{ product.price_min | money }}
+    {% else %}
+      {{ variant_min_price }}
+    {% endif %}
+  {% else %}
+    {%- if compare_at_price > price -%}
+      <ins>{{ money_price }}</ins>
+      <del>{{ compare_at_price | money }}</del>
+    {%- else -%}
+      <div>{{ money_price }}</div>
+    {%- endif -%}
+  {% endif %}
+</div>

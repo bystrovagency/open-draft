@@ -1,0 +1,92 @@
+{% liquid
+  assign collection = collections[section.settings.collection]
+  assign product_limit = section.settings.grid | times: section.settings.rows
+
+  case section.settings.grid
+    when 2
+      assign grid_item_width = 'col-sm-6 col-lg-6'
+    when 3
+      assign grid_item_width = 'col-sm-6 col-lg-4'
+    when 4
+      assign grid_item_width = 'col-sm-6 col-lg-3'
+  endcase
+
+%}
+
+<div class="section">
+  <div class="container">
+    <h2 class="text-center">{{ section.settings.title }}</h2>
+    <div class="row">
+      {% liquid
+        for product in collection.products limit: product_limit
+          render "product-card", product: product, grid_item_width: grid_item_width
+        else
+          for i in (1..product_limit)
+            capture current
+              cycle 1, 2, 3, 4, 5, 6
+            endcapture
+            render "product-card--empty", index: current, grid_item_width: grid_item_width
+          endfor
+        endfor
+      %}
+    </div>
+    {%- if section.settings.show_view_all -%}
+      {% assign button_label = 'collections.general.view_all' | t %}
+      <div class="pt-sm-4 text-center">
+        {% render 'button',
+          href: collection.url,
+          text: button_label
+        %}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": "Products per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": "Rows",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,82 @@
+<div class="section">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      {% for block in section.blocks %}
+        <div class="col-6 col-md-4 col-lg-2" {{ block.shopify_attributes }}>
+          <div class="benefits-item text-center">
+            <div class="benefits-item__img">
+              {% if block.settings.image != blank %}
+                {% render
+                  'image',
+                  src: block.settings.image,
+                  d: '50x',
+                  placeholder: 'img-placeholder.png',
+                  p_d: '50x'
+                %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            {% if block.settings.title != blank %}
+              <h2 class="h6 mb-0">{{ block.settings.title }}</h2>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Benefits",
+    "settings": [
+    
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Benefit",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Ultra-speed Connection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Benefits",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

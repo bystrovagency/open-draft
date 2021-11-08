@@ -1,0 +1,105 @@
+{% if section.blocks.size > 0 %}
+  <section class="section">
+    <div class="container">
+      {% if section.settings.title != blank %}
+        <h2 class="text-center">{{ section.settings.title }}</h2>
+      {% endif %}
+      <div class="row mb-n5">
+        {% for block in section.blocks %}
+          <div class="col-md-4 mb-5">
+            <div class="mb-2 image-container">
+              {% if block.settings.image != blank %}
+                {% render
+                  'image',
+                  src: block.settings.image,
+                  d: '413x',
+                  src_m: block.settings.image,
+                  m: '345x',
+                  placeholder: 'img-placeholder.png',
+                %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            {% if block.settings.title != blank %}
+              <h3 class="mb-2">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.copy != blank %}
+              <div class="rte mb-3">
+                {{ block.settings.copy }}
+              </div>
+            {% endif %}
+            {% if block.settings.btn_url != blank %}
+              {% render "button",
+                element: 'a',
+                href: block.settings.btn_url,
+                text: 'Read more',
+              %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Text columns with images",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Text columns with images"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Text column",
+        "type": "text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Add a title or tagline"
+          },
+          {
+            "type": "richtext",
+            "id": "copy",
+            "label": "Copy",
+            "default": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>"
+          },
+          {
+            "type": "url",
+            "id": "btn_url",
+            "label": "Button link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Text columns with images",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "text"
+          },
+          {
+            "type": "text"
+          },
+          {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

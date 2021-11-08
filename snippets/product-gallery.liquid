@@ -1,0 +1,20 @@
+<div class="product-gallery-splide">
+  <div class="splide__track">
+    <div class="splide__list">
+      {% for image in product.images %}
+        <div class="splide__slide">
+          <div class="product-gallery__img">
+            {% render
+              'image',
+              src: image,
+              d: '635x791',
+              src_m: image,
+              m: '290x364',
+              placeholder: 'img-placeholder.png'
+            %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,230 @@
+{% assign show_payment_icons = section.settings.show_payment_icons %}
+{%- capture payment_icon_markup -%}
+  {%- if show_payment_icons -%}
+    <div>
+      <div class="d-flex flex-wrap align-items-center justify-content-center pt-3">
+        {%- for type in shop.enabled_payment_types -%}
+          <div class="mx-3 mb-3">
+            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+<footer id="footer">
+  <div class="container">
+    {%- if section.blocks.size != 0 -%}
+      <div class="footer__holder">
+        <div class="row">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+            {%- when 'text' -%}
+              <div class="col-sm-12 col-lg-3 mb-6 mb-lg-0">
+                {% if block.settings.icon != blank %}
+                  <a href="{{ routes.root_url }}" class="footer__logo">
+                    <img data-src="{{ block.settings.icon | asset_url }}"
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="lazyload"
+                        data-sizes="auto" alt="image description">
+                  </a>
+                {% endif %}
+                {{ block.settings.text }}
+              </div>
+            {%- when 'newsletter' -%}
+              <div
+                  class="col-sm-6 col-md-4 col-lg-3 {% unless forloop.last %}mb-6 mb-lg-0{% endunless %}" {{ block.shopify_attributes }}>
+                <h3 class="footer__title h5">{{ block.settings.title }}</h3>
+                <p>{{ 'general.newsletter_form.newsletter_email' | t }}</p>
+                {% form 'customer', novalidate: 'novalidate', class: "footer__form pt-2" %}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  {%- if form.posted_successfully? -%}
+                    <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                      {{ 'general.newsletter_form.confirmation' | t }}
+                    </p>
+                  {%- endif -%}
+                  <div class="d-flex align-items-center position-relative">
+                    <input type="email" name="contact[email]"
+                           placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                           class="footer__form__input">
+                    <button type="submit" class="footer__form__button">
+                      <span class="accessibility">
+                        Button submit
+                      </span>
+                      {%- render 'icon-arrow-right' -%}
+                    </button>
+                  </div>
+                {% endform %}
+              </div>
+            {%- when 'link_list' -%}
+            {%- assign footer_linklist = block.settings.menu -%}
+              <div class="col-sm-6 col-md-4 col-lg-3 {% unless forloop.last %}mb-6 mb-lg-0{% endunless %}">
+                <nav class="footer__nav">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="footer__title h5">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  <ul>
+                    {%- for link in linklists[footer_linklist].links -%}
+                      <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                </nav>
+              </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center pt-3">
+        {% if section.settings.currency_switcher_enable %}
+          {% form 'currency', class: 'pr-3' %}
+            <label for="field-currency-01" class="accessibility">
+              Select currency
+            </label>
+            <select name="currency" class="w-100 mb-2" id="field-currency-01">
+              {% for currency in shop.enabled_currencies %}
+                {% if currency == cart.currency %}
+                  <option selected="true">{{ currency.iso_code }} {{ currency.symbol }}</option>
+                {% else %}
+                  <option>{{ currency.iso_code }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          {% endform %}
+        {% endif %}
+        {% if section.settings.language_switcher_enable %}
+          <div class="locales-wrapper">
+            <label for="field-locales-01" class="accessibility">
+              Select locales
+            </label>
+            <select name="locales" class="w-100 mb-2" id="field-locales-01">
+              {% for locale in shop.published_locales %}
+                <option {% if request.locale.name == locale.name %}selected{% endif %}
+                        data-path="{{ request.path }}" value="{{ locale.root_url }}">{{ locale.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="footer__panel text-center">
+      {% capture copy %}
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: routes.root_url | lstrip }}.
+      {% endcapture %}
+      {% assign first_part = copy | prepend: '<p>' %}
+      {% assign rights_text = section.settings.rights_text | replace: '<p>', first_part %}
+      <div {% if show_payment_icons %}class="mb-4 mb-md-2"{% endif %}>
+        {% if section.settings.rights_text != blank %}{{ rights_text }}{% else %}{{ copy }}{% endif %}
+      </div>
+      {{ payment_icon_markup }}
+    </div>
+  </div>
+</footer>
+
+{% style %}
+  #footer {
+    background: {{ section.settings.bg_color }};
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "richtext",
+      "id": "rights_text",
+      "label": "Rights text",
+      "default": "<p>All Rights Reserved. <a href=\"#\">Terms</a>, <a href=\"#\">Privacy &amp; Accessibility</a>.</p>"
+    },
+    {
+      "type": "header",
+      "content": "CURRENCY SELECTOR",
+      "info": "To add a currency, go to your [payment settings](/admin/settings/payments)."
+    },
+    {
+      "type": "checkbox",
+      "id": "currency_switcher_enable",
+      "label": "Show currency selector",
+      "default": true,
+      "info": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://docs.shopify.com/support/settings/general/tell-my-script-where-to-find-money-formats)."
+    },
+    {
+      "type": "header",
+      "content": "LANGUAGE SELECTOR"
+    },
+    {
+      "type": "checkbox",
+      "id": "language_switcher_enable",
+      "label": "Show language selector",
+      "default": true,
+      "info": "To add a language, go to your [language settings](/admin/settings/languages)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Quick links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "limit": 1,
+      "name": "Newsletter signup",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "info": "Subscribers will be added to your “accepts marketing” [customer list.](/admin/customers?query=&accepts_marketing=1)",
+          "default": "Newsletter"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text and icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "logo-2.svg"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Dignissim suspendisse in est ante in nibh mauris cursus mattis. Arcu odio ut sem nulla pharetra diam sit amet nisl.</p>"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

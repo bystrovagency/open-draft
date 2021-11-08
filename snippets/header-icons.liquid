@@ -1,0 +1,41 @@
+<ul class="header__action-menu d-flex flex-wrap align-items-center justify-content-center">
+  {% if section.settings.search_enable %}
+    <li class="d-none d-lg-block">
+      <a href="{{ routes.search_url }}" class="header__btn">
+        <span class="visually-hidden">
+          Search
+        </span>
+        {%- render 'icon' with 'search' -%}
+      </a>
+    </li>
+  {% endif %}
+  {% if shop.customer_accounts_enabled and section.settings.enable_account_icon %}
+    {% liquid
+      if customer
+        assign link = routes.account_url
+      else
+        assign link = routes.account_login_url
+      endif
+    %}
+    <li class="d-none d-xs-block">
+      <a href="{{ link }}" class="header__btn">
+        <span class="visually-hidden">
+          Go to account page
+        </span>
+        {%- render 'icon' with 'account' -%}
+      </a>
+    </li>
+  {% endif %}
+  {% if section.settings.cart_enable %}
+    <li data-cart-count>
+      <a href="{{ routes.cart_url }}" class="header__btn header__cart-btn" >
+        {%- render 'icon' with 'cart' -%}
+        {% if cart.item_count > 0 %}
+          <span class="header__cart-btn__num">
+            {{- cart.item_count -}}
+          </span>
+        {% endif %}
+      </a>
+    </li>
+  {% endif %}
+</ul>

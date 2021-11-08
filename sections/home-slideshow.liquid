@@ -1,0 +1,266 @@
+<div class="section"
+     id="slideshow-section"
+     data-section-type="slideshow"
+     data-section-id="{{ section.id }}"
+     data-autorotate="{{ section.settings.enable_autorotate }}"
+     data-blocks="{{ section.blocks.size }}"
+     data-slides-every="{{ section.settings.change_every }}">
+  <div class="splide slideshow-gallery">
+    <div class="splide__track">
+      <div class="splide__list">
+        {% for block in section.blocks %}
+          {%- capture image_position -%}
+            style="{{ block.settings.image_position }}"
+          {%- endcapture -%}
+          <div class="splide__slide" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+            <div class="slideshow-gallery__img {{ section.settings.slide_height }}">
+              {% if block.settings.image != blank %}
+                {% render
+                  'image',
+                  src: block.settings.image,
+                  d: '650x',
+                  src_m: block.settings.image,
+                  m: '375x',
+                  data_attribute: image_position
+                %}
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            <div class="slideshow-gallery__block">
+              <div class="container position-relative h-100">
+                <div class="row h-100 {{ block.settings.alignment }} text-center">
+                  <div class="col-sm-10 col-md-6 col-lg-4">
+                    <div class="slideshow-gallery__text-block {{ section.settings.text_size }}">
+                      {% if block.settings.title != blank %}
+                        <div class="slideshow-gallery__title">{{ block.settings.title }}</div>
+                      {% endif %}
+                      {{ block.settings.text }}
+                    </div>
+                    {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+                      {% render
+                        'button',
+                        href: block.settings.button_link,
+                        text: block.settings.button_label,
+                      %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if section.settings.enable_overlay %}
+              <div class="slideshow-gallery__overlay"></div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "settings": [
+      {
+        "type": "select",
+        "id": "slide_height",
+        "label": "Size height",
+        "default": "",
+        "options": [
+          {
+            "value": "slideshow-gallery__img--sm",
+            "label": "Small"
+          },
+          {
+            "value": "",
+            "label": "Medium"
+          },
+          {
+            "value": "slideshow-gallery__img--lg",
+            "label": "large"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "text_size",
+        "label": "Text size",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "Medium"
+          },
+          {
+            "value": "slideshow-gallery__text-block--lg",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_overlay",
+        "label": "Show overlay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_autorotate",
+        "label": "Auto-rotate slides",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id":  "change_every",
+        "min":  3,
+        "max":  9,
+        "step":  1,
+        "label":  "Change slides every",
+        "default": 5
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image position",
+            "default": "object-position: 50% 50%;",
+            "options": [
+              {
+                "value": "object-position: 0 0;",
+                "label": "Top left"
+              },
+              {
+                "value": "object-position: 50% 0;",
+                "label": "Top center"
+              },
+              {
+                "value": "object-position: 100% 0;",
+                "label": "Top right"
+              },
+              {
+                "value": "object-position: 0% 50%;",
+                "label": "Middle left"
+              },
+              {
+                "value": "object-position: 50% 50%;",
+                "label": "Middle center"
+              },
+              {
+                "value": "object-position: 100% 50%;",
+                "label": "Middle right"
+              },
+              {
+                "value": "object-position: 0 100%;",
+                "label": "Bottom left"
+              },
+              {
+                "value": "object-position: 50% 100%;",
+                "label": "Bottom center"
+              },
+              {
+                "value": "object-position: 100% 100%;",
+                "label": "Bottom right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "alignment",
+            "label": "Text alignment",
+            "default": "justify-content-center align-items-center",
+            "options": [
+              {
+                "value": "justify-content-start align-items-top",
+                "label": "Top left"
+              },
+              {
+                "value": "justify-content-center align-items-top",
+                "label": "Top center"
+              },
+              {
+                "value": "justify-content-end align-items-top",
+                "label": "Top right"
+              },
+              {
+                "value": "justify-content-start align-items-center",
+                "label": "Middle left"
+              },
+              {
+                "value": "justify-content-center align-items-center",
+                "label": "Middle center"
+              },
+              {
+                "value": "justify-content-end align-items-center",
+                "label": "Middle right"
+              },
+              {
+                "value": "justify-content-start align-items-end",
+                "label": "Bottom left"
+              },
+              {
+                "value": "justify-content-center align-items-end",
+                "label": "Bottom center"
+              },
+              {
+                "value": "justify-content-end align-items-end",
+                "label": "Bottom right"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Body text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, sit?</p>"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+            "default": "Button"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link",
+            "info": "Button is disabled if empty"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Slideshow",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

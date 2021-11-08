@@ -1,0 +1,244 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<div class="product-main-block__details body-2">
+  <div class="product__vendor body-2">
+    by <mark>{{ product.vendor }}</mark>
+  </div>
+  <h1 class="product__title h3">
+    {{ product.title }}
+  </h1>
+  {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+
+    <div class="product__price" data-price-wrapper>
+      <div class="product__price__box h5 d-flex flex-wrap align-items-center">
+        {% if product.compare_at_price_max > product.price %}
+          <ins data-product-price>
+            {{ product.compare_at_price_max | money }}
+          </ins>
+          <span class="accessibility" data-compare-text>
+            {{ 'products.product.regular_price' | t }}
+          </span>
+          {% if current_variant.compare_at_price > current_variant.price %}
+            <del data-compare-price>
+              {{ 'products.product.regular_price_short' | t }} {{ current_variant.compare_at_price | money }}
+            </del>
+          {% endif %}
+        {% else %}
+          <div data-product-price>
+            {{ current_variant.price | money }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        <div class="js">
+          {% if forloop.index0 > 0 %}
+            {% for value in option.values %}
+              <input type="radio" id="Option{{ option.position }}-{{ value }}" name="options[{{ option.name }}]" value="{{ value }}"{% if option.selected_value == value %} checked{% endif %}>
+              <label for="Option{{ option.position }}-{{ value }}">{{ value }}</label>
+            {% endfor %}
+          {% else %}
+            <label for="Option{{ option.position }}">
+              {{ option.name }}
+            </label>
+            {% comment %}<select
+              id="Option{{ option.position }}"
+              name="options[{{ option.name | escape }}]">
+              {% for value in option.values %}
+                <option
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}selected="selected"{% endif %}>
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>{% endcomment %}
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% endunless %}
+    {%- comment -%}
+      <div class="product-main-block__rating-box">
+        No reviews
+      </div>
+    {%- endcomment -%}
+    <div class="product__row">
+      <div class="row mb-2">
+        <div class="col-sm-7 col-lg-5">
+          <label class="product__label" for="size">Variant</label>
+          <select name="id" id="size" class="product__select w-100">
+            {% for variant in product.variants %}
+              <option
+                {% if variant == current_variant %}selected="selected"{% endif %}
+                {% unless variant.available %}disabled="disabled"{% endunless %}
+                value="{{ variant.id }}">
+                {{ variant.title }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0 custom-form">
+              <label class="product__label accessibility" for="Quantity">
+                {{ 'products.product.quantity' | t }}
+              </label>
+              <input type="number" id="Quantity" name="quantity" value="1" min="1">
+            </div>
+            <div class="col-lg-6">
+              {% render 'button',
+                  element: 'button',
+                  text: "Add to cart",
+                  class: 'button--secondary w-100',
+                  type: 'button'
+                %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-lg-8">
+        <div class="product__row">
+          {% if current_variant.available %}
+            {% render 'button',
+              element: 'button',
+              locales_text: 'products.product.add_to_cart',
+              data_attribute: 'data-submit-button',
+              class: 'w-100',
+              name: 'add',
+              other: 'name="add"',
+              type: 'submit'
+            %}
+          {% else %}
+            {% render 'button',
+              element: 'button',
+              locales_text: 'products.product.sold_out',
+              data_attribute: 'data-submit-button',
+              class: 'w-100 disabled',
+              other: 'name="add" disabled',
+              type: 'submit'
+            %}
+          {% endif %}
+        </div>
+        <div class="product__row">
+          <button type="button" class="w-100">Buy it now</button>
+        </div>
+      </div>
+    </div>
+
+  {% endform %}
+
+  <ul class="accordion mb-6 rte">
+    <li class="accordion--active">
+      <a href="#" class="accordion__opener title-1">
+        Product Details
+      </a>
+      <div class="accordion__slide">
+        <div class="accordion__block">
+          <div class="title-1 mb-2">
+            DJI Mavic Air 2 Key Features
+          </div>
+          <ul>
+            <li>
+              8K Hyperlapse Time-Lapse Video
+            </li>
+            <li>
+              8K Hyperlapse Time-Lapse Video
+            </li>
+            <li>
+              8K Hyperlapse Time-Lapse Video
+            </li>
+            <li>
+              8K Hyperlapse Time-Lapse Video
+            </li>
+          </ul>
+          <div class="body-2">
+            <p>
+              A midrange drone with flagship features, the DJI Mavic Air 2 combines a foldable and portable frame with a high-end camera system. The 3-axis gimbal sports a 1/2" CMOS sensor capable of capturing 8K Hyperlapse time-lapse shots, 4K60 video, 240 fps slow-motion 1080p video, and up to 48MP stills.
+            </p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a href="#" class="accordion__opener title-1">
+        Specifications
+      </a>
+      <div class="accordion__slide">
+        <div class="accordion__block">
+          <dl>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Dimensions - Depth</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Dimensions - Depth</dt>
+            <dd>CP.MA.0000017603</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+            <dt>Brand</dt>
+            <dd>DJI</dd>
+          </dl>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a href="#" class="accordion__opener title-1">
+        Warranty & Services
+      </a>
+      <div class="accordion__slide">
+        <div class="accordion__block">
+          <div class="body-2">
+            <p>
+              Free Technical Support
+            </p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a href="#" class="accordion__opener title-1">
+        Shipping & Returns
+      </a>
+      <div class="accordion__slide">
+        <div class="accordion__block">
+          <ul>
+            <li>
+              Standard shipping via UPS Ground is included in the quoted price.
+            </li>
+            <li>
+              Express shipping is via UPS.
+            </li>
+            <li>
+              Please choose your shipping method at checkout.
+            </li>
+            <li>
+              An additional Shipping and Handling fee will apply to express shipments. This fee will be quoted at checkout.
+            </li>
+            <li>
+              Delivery is available to Alaska, Hawaii and Puerto Rico; however, an additional Shipping and Handling fee will apply. This fee will be quoted at checkout. Additional transit time may also be required.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  {% if section.settings.show_share_buttons %}
+    {% render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+  {% endif %}
+</div>

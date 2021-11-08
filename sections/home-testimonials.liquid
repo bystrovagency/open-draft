@@ -1,0 +1,86 @@
+<div class="section"
+     id="testimonials-section"
+     data-section-type="testimonials"
+     data-section-id="{{ section.id }}">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="text-center">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="splide testimonials-slider">
+        <div class="splide__track">
+          <div class="splide__list">
+            {% for block in section.blocks %}
+              <div class="splide__slide" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+                <blockquote class="testimonials-slider__blockquote text-center">
+                  <div class="testimonials-slider__icon">
+                    {%- render 'icon' with 'quote' -%}
+                  </div>
+                  <div class="testimonials-slider__text-block rte">
+                    {{ block.settings.quote }}
+                  </div>
+                  {% if block.settings.author != blank %}
+                    <cite>{{ block.settings.author }}</cite>
+                  {% endif %}
+                </blockquote>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if section.blocks.size == 0 %}
+      {% render 'no-blocks' %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "settings": [
+       {
+         "type": "text",
+         "id": "title",
+         "label": "Heading",
+         "default": "Heading"
+       }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Author",
+            "default": "Author's name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

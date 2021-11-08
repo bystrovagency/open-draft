@@ -1,0 +1,11 @@
+{
+  "name": "product-variants-swatcher",
+  "sections": {
+    "main": {
+      "type": "product-variants-swatcher"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

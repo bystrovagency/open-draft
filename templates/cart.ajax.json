@@ -1,0 +1,12 @@
+{
+  "name": "Cart ajax",
+  "layout": false,
+  "sections": {
+    "main": {
+      "type": "cart-ajax-template"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

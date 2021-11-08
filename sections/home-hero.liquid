@@ -1,0 +1,176 @@
+<section class="hero{% if section.settings.fullheight %} hero--full-height{% endif %}">
+  <div class="hero__img">
+    {%- if section.settings.image != blank -%}
+      {% render "image",
+        src: section.settings.image,
+        src_m: section.settings.image_mobile,
+        placeholder: 'img-placeholder.png',
+        m: '375x',
+        d: '1438x'
+      %}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="hero__block">
+    <div class="container position-relative h-100">
+      <div class="row h-100 {{ section.settings.alignment }} {{ section.settings.alignment_text }} custom-color">
+        <div class="col-sm-10 col-md-6 col-lg-4">
+          {%- if section.settings.title != blank -%}
+            <h1>{{ section.settings.title }}</h1>
+          {%- endif -%}
+          {{ section.settings.text }}
+          {%- if section.settings.button_link != blank and section.settings.button_label != blank -%}
+            {% render 'button',
+              href: section.settings.button_link,
+              text: section.settings.button_label
+            %}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  {% if section.settings.color != blank %}
+    .custom-color {
+    color: {{ section.settings.color }};
+    }
+    @media screen and (max-width: 767px) {
+    .custom-color {
+    color: {{ section.settings.color_mobile }};
+    }
+    }
+  {% endif %}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Title"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "default": "justify-content-center align-items-center",
+      "options": [
+        {
+          "value": "justify-content-start align-items-top",
+          "label": "Top left"
+        },
+        {
+          "value": "justify-content-center align-items-top",
+          "label": "Top center"
+        },
+        {
+          "value": "justify-content-end align-items-top",
+          "label": "Top right"
+        },
+        {
+          "value": "justify-content-start align-items-center",
+          "label": "Middle left"
+        },
+        {
+          "value": "justify-content-center align-items-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "justify-content-end align-items-center",
+          "label": "Middle right"
+        },
+        {
+          "value": "justify-content-start align-items-end",
+          "label": "Bottom left"
+        },
+        {
+          "value": "justify-content-center align-items-end",
+          "label": "Bottom center"
+        },
+        {
+          "value": "justify-content-end align-items-end",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_text",
+      "label": "Alignment regarding text block",
+      "default": "text-center",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_mobile",
+      "label": "Text color mobile",
+      "default": "#000000"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Button is disabled if empty"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Button label"
+    },
+    {
+      "type": "checkbox",
+      "id": "fullheight",
+      "label": "Full height",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text overlay",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

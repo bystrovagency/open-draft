@@ -1,0 +1,42 @@
+{% if section.settings.title != blank or section.settings.copy != blank %}
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="rich-text-section rich-text-section--size-sm rte text-center">
+            {% if section.settings.title != blank %}
+              <h2 class="h3">{{ section.settings.title }}</h2>
+            {% endif %}
+            {{ section.settings.copy }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Richtext",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Talk about your brand"
+      },
+      {
+        "type": "richtext",
+        "id": "copy",
+        "label": "Richtext",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Richtext",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

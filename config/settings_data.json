@@ -1,0 +1,401 @@
+{
+  "current": {
+    "elements_outline": false,
+    "color_accent": "#0f62fe",
+    "color_body_text": "#000000",
+    "color_main_bg": "#ffffff",
+    "color_base_links": "#000000",
+    "button_text_color": "#262c30",
+    "button_hover_color": "#fcf113",
+    "button_focus_text_color": "#262c30",
+    "button_border_color": "#000000",
+    "button_hover_border_color": "#000",
+    "button_focus_border_color": "#fcf113",
+    "button_bg_color": "#fcf113",
+    "button_hover_bg_color": "#000",
+    "button_focus_bg_color": "#fcf113",
+    "button_border_radius": "3px",
+    "button_size": "button",
+    "checkout_button_text_color": "#262c30",
+    "checkout_button_hover_color": "#fcf113",
+    "checkout_button_focus_text_color": "#262c30",
+    "checkout_button_border_color": "#000000",
+    "checkout_button_hover_border_color": "#000",
+    "checkout_button_focus_border_color": "#fcf113",
+    "checkout_button_bg_color": "#fcf113",
+    "checkout_button_hover_bg_color": "#000",
+    "checkout_button_focus_bg_color": "#fcf113",
+    "font_library": "shopify",
+    "font_heading": "assistant_n4",
+    "heading_base_size": 40,
+    "font_body": "assistant_n4",
+    "font_base_size": 16,
+    "custom_heading_weight": 400,
+    "custom_body_weight": 300,
+    "share_image": "",
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_instagram_link": "",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "cart_notes_enable": true,
+    "limit": 8,
+    "favicon": "",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "enable_fonts_library": true,
+    "sections": {
+      "home-hero": {
+        "type": "home-hero",
+        "settings": {
+          "image": "",
+          "image_mobile": "",
+          "title": "Title",
+          "alignment": "justify-content-start align-items-center",
+          "alignment_text": "text-center",
+          "text": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>",
+          "color": "#ffffff",
+          "color_mobile": "#000000",
+          "button_link": "shopify://collections/all",
+          "button_label": "Button label",
+          "fullheight": false
+        }
+      },
+      "1589983221519": {
+        "type": "home-featured-collection",
+        "settings": {
+          "title": "Featured collection",
+          "collection": "test",
+          "grid": 4,
+          "rows": 2,
+          "show_view_all": true
+        }
+      },
+      "1589984445229": {
+        "type": "home-hero",
+        "settings": {
+          "image": "shopify://shop_images/Untitled_design.png",
+          "title": "Image with text overlay",
+          "alignment": "justify-content-start align-items-center",
+          "alignment_text": "text-center",
+          "text": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>",
+          "color": "#000000",
+          "color_mobile": "#000000",
+          "button_link": "shopify://collections",
+          "button_label": "Read more",
+          "fullheight": false
+        }
+      },
+      "1589985337197": {
+        "type": "home-image-with-text",
+        "settings": {
+          "image": "shopify://shop_images/working-at-night.jpg",
+          "layout": "",
+          "title": "Image with text",
+          "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p><p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p><p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "button_label": "Shop now",
+          "button_link": "shopify://products/apple-macbook-pro-16-1tb-2019-silver"
+        }
+      },
+      "1589985461361": {
+        "type": "home-image-with-text",
+        "settings": {
+          "image": "shopify://shop_images/woman-works-on-computer-at-home.jpg",
+          "layout": "flex-md-row-reverse",
+          "title": "Image with text",
+          "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "button_label": "Shop now",
+          "button_link": "shopify://products/bird-scarf-product"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "1589993081754": {
+            "type": "text",
+            "settings": {
+              "icon": "logo-2.svg",
+              "text": "<p>Dignissim suspendisse in est ante in nibh mauris cursus mattis. Arcu odio ut sem nulla pharetra diam sit amet nisl.</p>"
+            }
+          },
+          "1589988638820": {
+            "type": "link_list",
+            "settings": {
+              "title": "Explore",
+              "menu": "footer"
+            }
+          },
+          "1589988651729": {
+            "type": "link_list",
+            "settings": {
+              "title": "Quick links",
+              "menu": "footer-second-menu"
+            }
+          },
+          "1589988667036": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Newsletter"
+            }
+          }
+        },
+        "block_order": [
+          "1589993081754",
+          "1589988638820",
+          "1589988651729",
+          "1589988667036"
+        ],
+        "settings": {
+          "show_payment_icons": true,
+          "bg_color": "#ffffff",
+          "rights_text": "<p>All Rights Reserved. <a href=\"#\">Terms</a>, <a href=\"#\">Privacy &amp; Accessibility</a>.</p>",
+          "currency_switcher_enable": true,
+          "language_switcher_enable": true
+        }
+      },
+      "popup": {
+        "type": "popup",
+        "settings": {
+          "title": "Are you over 18?",
+          "text": "<p>This website requires you to be 18 or older to enter.</p>",
+          "button_text": "Yes, i am",
+          "days": "1",
+          "custom_html": "",
+          "enable": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "announcement_bar_enabled": true,
+          "announcement_bar_home_page_only": false,
+          "announcement_bar_text": "We are in open source!",
+          "announcement_bar_link": "https://github.com/bystrovagency/open-draft",
+          "announcement_bar_bg_color": "#000000",
+          "announcement_bar_text_color": "#ffffff",
+          "logo_svg": "logo-2.svg",
+          "logo_text": "Draft",
+          "menu": "main-menu",
+          "layout": "left",
+          "search_enable": true,
+          "enable_search_form": true,
+          "cart_enable": true,
+          "enable_account_icon": true,
+          "button_link": "",
+          "button_label": "Submit",
+          "enable_shadow": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {}
+      },
+      "1601544214239": {
+        "type": "home-logos-list",
+        "blocks": {
+          "1601544214239-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-3": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          }
+        },
+        "block_order": [
+          "1601544214239-0",
+          "1601544214239-1",
+          "1601544214239-2",
+          "1601544214239-3"
+        ],
+        "settings": {
+          "title": "Logo list"
+        }
+      },
+      "1601544682336": {
+        "type": "newsletter",
+        "settings": {}
+      },
+      "1601544716980": {
+        "type": "home-benefits",
+        "blocks": {
+          "1601544716980-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-3": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-4": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          }
+        },
+        "block_order": [
+          "1601544716980-0",
+          "1601544716980-1",
+          "1601544716980-2",
+          "1601544716980-3",
+          "1601544716980-4"
+        ],
+        "settings": {}
+      },
+      "1601545071577": {
+        "type": "home-plans",
+        "blocks": {
+          "1601545071577-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          },
+          "1601545071577-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          },
+          "1601545071577-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          }
+        },
+        "block_order": [
+          "1601545071577-0",
+          "1601545071577-1",
+          "1601545071577-2"
+        ],
+        "settings": {
+          "title": "Choose your plan",
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>"
+        }
+      },
+      "home-iframe-video": {
+        "type": "home-iframe-video",
+        "settings": {
+          "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "enable_full_width": true,
+          "title": "Heading",
+          "subheading": "Subheading",
+          "button_label": "Button",
+          "enable_overlay": true,
+          "text_color": ""
+        }
+      },
+      "160819240302c38667": {
+        "type": "home-iframe-video",
+        "settings": {
+          "video": "https://vimeo.com/420059153",
+          "enable_full_width": true,
+          "title": "",
+          "subheading": "",
+          "button_label": "Button",
+          "enable_overlay": false,
+          "text_color": ""
+        }
+      }
+    },
+    "content_for_index": [
+      "1589984445229",
+      "1589983221519",
+      "1589985337197",
+      "1589985461361",
+      "1601544214239",
+      "1601544682336",
+      "1601544716980",
+      "1601545071577",
+      "160819240302c38667"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "content_for_index": []
+    }
+  }
+}

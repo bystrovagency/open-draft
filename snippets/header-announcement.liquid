@@ -1,0 +1,15 @@
+{%- if section.settings.announcement_bar_enabled -%}
+  {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+    <div class="header__bar py-2">
+      <div class="container">
+        <ul class="header__bar-list d-flex flex-wrap align-items-center justify-content-center">
+          {%- if section.settings.announcement_bar_link != blank -%}
+            <li><a href="{{ section.settings.announcement_bar_link }}">{{ section.settings.announcement_bar_text | escape }}</a></li>
+          {%- else -%}
+            <li>{{ section.settings.announcement_bar_text | escape }}</li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

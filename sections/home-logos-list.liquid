@@ -1,0 +1,84 @@
+<div class="section">
+  <div class="container">
+    <h2 class="text-center">{{ section.settings.title }}</h2>
+    <div class="row justify-content-center mb-n4">
+      {% for block in section.blocks %}
+        <div class="col-6 col-sm-4 col-lg-3 mb-4" {{ block.shopify_attributes }}>
+          <div class="logos-item">
+            {% if block.settings.url %}
+              <a href="{{ block.settings.url }}">
+            {% else %}
+              <div>
+            {% endif %}
+              {% if block.settings.image != blank %}
+                {% render
+                  'image',
+                  src: block.settings.image,
+                  d: '300x'
+                  %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+              {% endif %}
+            {% if block.settings.url %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Logo list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Logo list"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

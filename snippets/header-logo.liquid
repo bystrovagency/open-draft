@@ -1,0 +1,17 @@
+{% if section.settings.logo_svg != blank %}
+  <div class="logo">
+    <a href="{{ routes.root_url }}">
+      <img src="{{ section.settings.logo_svg | asset_url }}" alt="image description">
+    </a>
+  </div>
+{% elsif section.settings.logo != blank %}
+  <div class="logo">
+    <a href="{{ routes.root_url }}">
+      <img src="{{ section.settings.logo | img_url: '172x' }}" alt="image description">
+    </a>
+  </div>
+{% else %}
+  <div class="logo-text text-center">
+    <a href="{{ routes.root_url }}">{{ section.settings.logo_text }}</a>
+  </div>
+{% endif %}

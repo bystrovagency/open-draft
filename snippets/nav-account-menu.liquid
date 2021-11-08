@@ -1,0 +1,26 @@
+{% if shop.customer_accounts_enabled %}
+  {% if customer %}
+    <li>
+      <a href="{{ routes.account_url }}">
+        {{ 'customer.login.title' | t }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ routes.account_logout_url }}">
+        {{ 'customer.login.log_out' | t }}
+      </a>
+    </li>
+  {% else %}
+    <li>
+      <a href="{{ routes.account_register_url }}">
+        {{ 'customer.login.create_account' | t }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ routes.account_login_url }}">
+        {{ 'customer.login.log_in' | t }}
+      </a>
+    </li>
+  {% endif %}
+  
+{% endif %}

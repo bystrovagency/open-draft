@@ -1,0 +1,114 @@
+{% assign hasText = false %}
+{% if section.settings.title != blank or section.settings.subheading != blank or section.settings.button_link != blank %}
+  {% assign hasText = true %}
+{% endif %}
+<div class="section video-section"
+     data-section-type="iframe-video"
+     data-section-id="{{ section.id }}">
+  <div {% unless section.settings.enable_full_width %}class="container"{% endunless %}>
+    <div class="video-section__holder">
+      <div class="video-section__container {% if section.settings.enable_overlay and hasText %}video-section__container--overlay{% endif %}">
+        {% if hasText %}
+          <div class="video-section__block {{ section.settings.text_color }}">
+            {% if section.settings.title != blank %}
+              <h2 class="mb-3">{{ section.settings.title }}</h2>
+            {% endif %}
+            {% if section.settings.subheading != blank %}
+              <div class="mb-4">{{ section.settings.subheading }}</div>
+            {% endif %}
+            {% if section.settings.button_link != blank %}
+              {% render
+                'button',
+                element: 'a',
+                href: section.settings.button_link,
+                text: section.settings.button_label,
+              %}
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="media-block__video"
+             data-section-id="{{ section.id }}"
+             data-video-type="{{ section.settings.video.type }}"
+             data-video-id="{{ section.settings.video.id }}">
+          <div class="fluid-iframe">
+            <div id="player-{{ section.id }}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Iframe video",
+  "settings": [
+    {
+      "type": "video_url",
+      "label": "Video URL",
+      "id": "video",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Subheading"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Button is disabled if empty"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_overlay",
+      "label": "Darken video",
+      "default": true,
+      "info": "(overlay, will be used when text overlay exist)"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "",
+      "options": [
+        {
+          "value": " customizable-base-text",
+          "label": "White"
+        },
+        {
+          "value": "",
+          "label": "Black"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Iframe video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}

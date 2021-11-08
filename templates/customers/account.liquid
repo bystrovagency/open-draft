@@ -1,0 +1,55 @@
+<div class="section page-section" id="content" tabindex="0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-md-auto">
+        <div class="account-page__title text-center">
+          <h1 class="h2 mb-2">{{ 'customer.account.title' | t }}</h1>
+          <a href="/account/logout">Log out</a>
+        </div>
+        <h2 class="h3 account__sub-title">{{ 'customer.orders.title' | t }}</h2>
+        {% paginate customer.orders by 20 %}
+          {% if customer.orders.size != 0 %}
+            <table class="order-table">
+              <tbody>
+                <tr class="d-none d-md-table-row">
+                  <th>Order</th>
+                  <th>Date</th>
+                  <th>Payment Status</th>
+                  <th>Fulfillment Status</th>
+                  <th>Total</th>
+                </tr>
+                {% for order in customer.orders %}
+                  <tr>
+                    <td data-label="Order">
+                      {{ order.name | link_to: order.customer_url }}
+                    </td>
+                    <td data-label="Date">
+                      <time datetime="{{ order.created_at | date: format: 'month_day_year' }}">{{ order.created_at | date: format: 'month_day_year' }}</time>
+                    </td>
+                    <td data-label="Payment Status">
+                      Paid
+                    </td>
+                    <td data-label="Fulfillment Status">
+                      Unfulfilled
+                    </td>
+                    <td data-label="Total">
+                      {{ order.total_price | money }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {% endif %}
+          {% if paginate.pages > 1 %}
+            {% render 'pagination' %}
+          {% endif %}
+        {% endpaginate %}
+        <h2 class="h3 account__sub-title">{{ 'customer.account.details' | t }}</h2>
+        {{ customer.default_address | format_address }}
+        <a class="button" href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="section benefits-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="row align-items-center">
+          {% if section.settings.title != blank or section.settings.text != blank %}
+            <div class="col-md-6 mb-5 mb-md-0 text-center text-md-left">
+              {% if section.settings.title != blank %}
+                <h2>{{ section.settings.title }}</h2>
+              {% endif %}
+              {% if section.settings.text != blank %}
+                <div class="benefits-list__text-box">
+                  {{ section.settings.text }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if section.settings.html != blank %}
+            <div class="col-md-6 rte">
+              {{ section.settings.html }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Benefits with text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Unlimited Phone Data\" Is Not \"Unlimited Home Data"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Purus ut faucibus pulvinar elementum integer. Lorem mollis aliquam ut porttitor leo a diam sollicitudin. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>"
+    },
+    {
+      "type": "html",
+      "id": "html",
+      "label": "HTML",
+      "default": "<ul class=\"benefits-list__items list-checks\">\n                <li>Unlimited Wi-Fi for EVERY connected device</li>\n                <li>14 Day, No Risk, Money-Back Guarantee</li>\n                <li>Human Support</li>\n                <li>Rich Documentation</li>\n                <li>Unlimited Phone Data</li>\n              </ul>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits with text",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

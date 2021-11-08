@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="no-js supports-no-cookies" lang="{{ request.locale.iso_code }}">
+  <head>
+    {% liquid
+      render 'theme-meta'
+      render 'theme-seo'
+      render 'theme-head-styles'
+
+      render 'theme-locales'
+      render 'theme-head-scripts'
+      render 'head-third-party-scripts'
+    %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+    {% section 'popup' %}
+    
+    <div id="wrapper" class="page-wrapper">
+      {% section 'header' %}
+
+      <main role="main" id="main">
+        {{ content_for_layout }}
+      </main>
+      {%- render 'cart-popup' -%}
+      {% section 'footer' %}
+    </div>
+
+    {% render 'theme-body-scripts' %}
+    {% render 'body-third-party-scripts' %}
+  </body>
+</html>

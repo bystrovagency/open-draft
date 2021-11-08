@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "show_quantity": true,
+        "show_variant_label": true,
+        "show_vendor": true,
+        "show_dynamic_button": true,
+        "show_share_buttons": true,
+        "show_size_chart": true,
+        "size_chart_url": "shopify://pages/size-chart"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_product_recommendations": true,
+        "title": "You may also like",
+        "limit": 4,
+        "button_link": "",
+        "button_label": "back to home page"
+      }
+    }
+  },
+  "order": ["product", "product-recommendations"]
+}

@@ -1,0 +1,130 @@
+<style>
+
+  {% liquid
+    if settings.font_library == "shopify"
+      echo settings.font_heading | font_face
+      echo settings.font_body | font_face
+
+      assign font_body_bold = settings.font_body | font_modify: 'weight', 'bolder'
+      assign font_body_italic = settings.font_body | font_modify: 'style', 'italic'
+      assign font_heading_bold = settings.font_heading | font_modify: 'weight', 'bolder'
+    endif
+  %}
+  {% if font_body_bold or font_heading_bold or font_body_italic %}
+    {{ font_body_bold | font_face }}
+    {{ font_heading_bold | font_face }}
+    {{ font_body_italic | font_face }}
+  {% endif %}
+
+  :root {
+    --color-accent: {{ settings.color_accent }};
+    --color-body-text: {{ settings.color_body_text }};
+    --color-main-background: {{ settings.color_main_bg }};
+    --color-border: {{ settings.color_body_text | color_lighten: 50 }};
+    --base-footer-background: {{ settings.color_base_footer_background }};
+    --base-accordion-background: {{ settings.color_base_accordion_background }};
+    --base-links: {{ settings.color_base_links }};
+    --base-sale-price: {{ settings.color_base_sale_price }};
+    --base-icons: {{ settings.color_base_icons }};
+    --base-icons-on-hover: {{ settings.color_base_icons_on_hover }};
+    --base-secondary-background: {{ settings.color_base_secondary_background }};
+    --base-border: {{ settings.color_base_border }};
+
+    /* Messages */
+    --messages-error: {{ settings.color_messages_error }};
+    --messages-success: {{ settings.color_messages_success }};
+
+    /* Customizable */
+    --customizable-base-text: {{ settings.customizable_base_text }};
+
+    /* Font library */
+    {%- case settings.font_library -%}
+      {%- when 'shopify' -%}
+        --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+        --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+        --font-body-weight: {{ settings.font_body.weight }};
+        --font-heading-weight: {{ settings.font_heading.weight }};
+        --font-body-style: {{ settings.font_body.style }};
+        --font-heading-style: {{ settings.font_heading.style }};
+      {%- when 'google' -%}
+        --font-heading: '{{ settings.google_font_heading }}', 'Times New Roman', 'Times', 'Baskerville', 'Georgia', serif;
+        --font-body: '{{ settings.google_font_body }}', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+        --font-body-weight: {{ settings.google_body_weight }};
+        --font-heading-weight: {{ settings.google_heading_weight }};
+        --font-body-style: {{ settings.google_body_style }};
+        --font-heading-style: {{ settings.google_heading_style }};
+      {%- when 'custom' -%}
+        --font-heading: '{{ settings.custom_font_heading }}', 'Times New Roman', 'Times', 'Baskerville', 'Georgia', serif;
+        --font-body: '{{ settings.custom_font_body }}', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+        --font-body-weight: {{ settings.custom_body_weight }};
+        --font-heading-weight: {{ settings.custom_heading_weight }};
+        --font-body-style: {{ settings.custom_body_style }};
+        --font-heading-style: {{ settings.custom_heading_style }};
+      {%- when 'hardcoded' -%}
+        --font-heading: 'Didot', 'Times New Roman', 'Times', 'Baskerville', 'Georgia', serif;
+        --font-body: 'Neutraface', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+        --font-body-weight: {{ settings.hardcoded_body_weight }};
+        --font-heading-weight: {{ settings.hardcoded_heading_weight }};
+        --font-body-style: normal;
+        --font-heading-style: italic;
+    {%- endcase -%}
+
+    /* Base text settings */
+    --font-size-base: {{ settings.font_base_size }}px;
+    --heading-font-size: {{ settings.heading_base_size }}px;
+    --font-body-bold-weight: {{ font_body_bold.weight | default: 'bold' }};
+
+    /* Project variables */
+    --header-logo-width: 106px;
+
+    --button-text-color: {{ settings.button_text_color }};
+    --button-hover-text-color: {{ settings.button_hover_color }};
+    --button-focus-text-color: {{ settings.button_focus_text_color }};
+    --button-border-color: {{ settings.button_border_color }};
+    --button-hover-border-color: {{ settings.button_hover_border_color }};
+    --button-focus-border-color: {{ settings.button_focus_border_color }};
+    --button-background-color: {{ settings.button_bg_color }};
+    --button-hover-background-color: {{ settings.button_hover_bg_color }};
+    --button-focus-background-color: {{ settings.button_focus_bg_color }};
+    --button-text-on-disabled: {{ settings.button_text_on_disabled }};
+    --button-border-on-disabled: {{ settings.button_border_on_disabled }};
+    --button-background-on-disabled: {{ settings.button_background_on_disabled }};
+    --button-border-radius: {{ settings.button_border_radius }};
+
+    /* Checkout button colors */
+    --secondary-button-text-color: {{ settings.secondary_button_text_color }};
+    --secondary-button-hover-text-color: {{ settings.secondary_button_hover_text_color }};
+    --secondary-button-focus-text-color: {{ settings.secondary_button_focus_text_color }};
+    --secondary-button-border-color: {{ settings.secondary_button_border_color }};
+    --secondary-button-hover-border-color: {{ settings.secondary_button_hover_border_color }};
+    --secondary-button-focus-border-color: {{ settings.secondary_button_focus_border_color }};
+    --secondary-button-background-color: {{ settings.secondary_button_background_color }};
+    --secondary-button-hover-background-color: {{ settings.secondary_button_hover_background_color }};
+    --secondary-button-focus-background-color: {{ settings.secondary_button_focus_background_color }};
+    --secondary-button-text-on-disabled: {{ settings.secondary_button_text_on_disabled }};
+    --secondary-button-border-on-disabled: {{ settings.secondary_button_border_on_disabled }};
+    --secondary-button-background-on-disabled: {{ settings.secondary_button_background_on_disabled }};
+
+    /* Checkout button colors */
+    --checkout-button-text-color: {{ settings.checkout_button_text_color }};
+    --checkout-button-hover-text-color: {{ settings.checkout_button_hover_color }};
+    --checkout-button-focus-text-color: {{ settings.checkout_button_focus_text_color }};
+    --checkout-button-background-color: {{ settings.checkout_button_bg_color }};
+    --checkout-button-hover-background-color: {{ settings.checkout_button_hover_bg_color }};
+    --checkout-button-focus-background-color: {{ settings.checkout_button_focus_bg_color }};
+    --checkout-button-border-color: {{ settings.checkout_button_border_color }};
+    --checkout-button-hover-border-color: {{ settings.checkout_button_hover_border_color }};
+    --checkout-button-focus-border-color: {{ settings.checkout_button_focus_border_color }};
+
+    {% if settings.elements_outline %}
+      --elements-outline: 1px dashed;
+      --color-outline: {{ settings.color_outline }}
+    {% endif %}
+  }
+
+  {% if settings.elements_outline %}
+  * {
+    outline: var(--elements-outline) var(--color-outline);
+  }
+  {% endif %}
+</style>
